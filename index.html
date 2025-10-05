@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Overwatch - Asteroid & Space Debris Awareness</title>
-    <meta name="description" content="Educational platform for understanding asteroid impacts and space debris threats. Interactive simulators powered by NASA data.">
+    <meta name="description" content="Educational platform for understanding asteroid impacts and space debris threats. Interactive simulators powered by NASA data. HTML, JavaScript and CSS code generated with the help of Claude 4.5 Sonnet.">
+    <meta name="ai-generation" content="code-assisted: Claude 4.5 Sonnet, editing: 100% human">
     <style>
         * {
             margin: 0;
@@ -759,6 +760,31 @@
         .hazard-orange strong { color: #f97316; }
         .hazard-red strong { color: #ef4444; }
 
+        .footer {
+            background: #000000;
+            border-top: 1px solid #1a1a1a;
+            padding: 2rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer p {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            color: #999;
+            font-size: 0.8rem;
+        }
+
         .parallax-bg {
             position: fixed;
             top: 50%;
@@ -849,8 +875,7 @@
         }
     </style>
 </head>
-<body>
-    <nav>
+<body><nav>
         <div class="nav-container">
             <div class="nav-left">
                 <div class="logo">Space Overwatch</div>
@@ -930,7 +955,7 @@
         <div class="comparison-section">
             <div class="comparison-title">
                 <h2>Two Different Threats from Space</h2>
-                <p style="color: #999999; font-size: 1rem;">Understanding the key differences between asteroid impacts and satellite debris</p>
+                <p style="color: #999999; font-size: 1rem;">Understanding the key differences between asteroid impacts and space debris</p>
             </div>
             <div class="comparison-container">
                 <div class="comparison-item slide-in-left" data-scroll-animate>
@@ -943,19 +968,16 @@
                     </div>
                 </div>
                 <div class="comparison-item slide-in-right" data-scroll-animate>
-                    <img src="https://cdn.mos.cms.futurecdn.net/PBZYsjjY667U3r65tXuT7N-970-80.jpg.webp" alt="Satellite">
-                    <h3>Satellites</h3>
+                    <img src="https://cdn.mos.cms.futurecdn.net/2BwT94EqyXaNQju7WmWM9j.jpg" alt="Space Debris">
+                    <h3>Space Debris</h3>
                     <p>High probability of reentry with significant hazard. Growing orbital debris threatens infrastructure and causes atmospheric pollution through harmful emissions during atmospheric degradation.</p>
                     <div class="stat-box red" data-scroll-animate>
-                        <span class="stat-number">~1,095 satellites</span>
+                        <span class="stat-number">~1,095 objects</span>
                         Fall back to Earth every year
                     </div>
                 </div>
             </div>
-            <div class="current-label" data-scroll-animate>Current Polluted Impact On The Atmosphere Per Year</div>
             <div class="tonnage-container">
-                <div class="tonnage-stat" data-scroll-animate>0 tonnes</div>
-                <div class="tonnage-stat" data-scroll-animate>1000 tonnes</div>
             </div>
 
             <div class="past-events-label" data-scroll-animate>Past Events</div>
@@ -973,13 +995,15 @@
 
         <div class="simulator-link">
             <h2>Explore Our Interactive Tools</h2>
-            <p style="margin-bottom: 2rem; color: #999999;">Use our simulators to understand asteroid impacts and space debris environmental effects</p>
+            <p style="margin-bottom: 2rem; color: #999999;">Real-time asteroid distance tracking and collision simulation, plus space debris environmental impact analysis</p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 <a href="simulator.html" class="simulator-btn" target="_blank">Asteroid Impact Simulator</a>
                 <a href="enviromental.html" class="simulator-btn" target="_blank">Environmental Impact Model</a>
             </div>
         </div>
-    </div><div id="news" class="page">
+    </div>
+
+    <div id="news" class="page">
         <div class="hero">
             <h1>Latest News</h1>
             <p>Recent developments in asteroid tracking and space debris management</p>
@@ -1217,9 +1241,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div id="neo" class="page">
+    </div><div id="neo" class="page">
         <div class="hero">
             <h1>Near-Earth Objects (NEOs)</h1>
             <p>Asteroids and comets whose orbits bring them close to Earth</p>
@@ -1394,60 +1416,60 @@
             
             <div class="scale-grid">
                 <div class="scale-column">
-                    <h3>Probability</h3>
+                    <h3>Impact Probability</h3>
                     
                     <div class="scale-item">
-                        <strong>None</strong>
-                        <p>Like finding a specific grain of sand in a desert</p>
+                        <strong>0 - None</strong>
+                        <p>Likelihood of collision is effectively zero, or object is too small to penetrate Earth's atmosphere.</p>
                     </div>
                     
                     <div class="scale-item">
-                        <strong>Very Low</strong>
-                        <p>Like being struck by lightning in your lifetime</p>
+                        <strong>1 - Very Low</strong>
+                        <p>Chance of collision is extremely unlikely, about the same as being struck by lightning.</p>
                     </div>
                     
                     <div class="scale-item">
-                        <strong>Worth Watching</strong>
-                        <p>Like a coin landing on its edge</p>
+                        <strong>2-4 - Worth Monitoring</strong>
+                        <p>Close attention by astronomers warranted. Collision is possible but unlikely.</p>
                     </div>
                     
                     <div class="scale-item">
-                        <strong>Likely</strong>
-                        <p>Better than a coin flip</p>
+                        <strong>5-7 - Threatening</strong>
+                        <p>Close encounter with significant threat. Careful monitoring essential.</p>
                     </div>
                     
                     <div class="scale-item">
-                        <strong>Certain</strong>
-                        <p>Impact will happen</p>
+                        <strong>8-10 - Certain Impact</strong>
+                        <p>Collision is certain. Evacuation and disaster planning required.</p>
                     </div>
                 </div>
 
                 <div class="scale-column">
-                    <h3>Hazard Level</h3>
+                    <h3>Destruction Potential</h3>
                     
                     <div class="scale-item hazard-white">
-                        <strong>No Threat</strong>
-                        <p>Burns up completely in atmosphere</p>
+                        <strong>No Consequence</strong>
+                        <p>Object burns up completely in atmosphere with no ground damage.</p>
                     </div>
                     
                     <div class="scale-item hazard-green">
-                        <strong>Small</strong>
-                        <p>Local damage, like a neighborhood</p>
+                        <strong>Local Damage</strong>
+                        <p>Could cause localized destruction equivalent to a neighborhood or small town.</p>
                     </div>
                     
                     <div class="scale-item hazard-yellow">
-                        <strong>Moderate</strong>
-                        <p>Could devastate a city</p>
+                        <strong>Regional Devastation</strong>
+                        <p>Capable of causing widespread destruction across a large metropolitan area.</p>
                     </div>
                     
                     <div class="scale-item hazard-orange">
-                        <strong>Large</strong>
-                        <p>Could destroy an entire country</p>
+                        <strong>Continental Catastrophe</strong>
+                        <p>Could cause unprecedented regional devastation across an entire continent.</p>
                     </div>
                     
                     <div class="scale-item hazard-red">
-                        <strong>Global</strong>
-                        <p>Threatens civilization itself</p>
+                        <strong>Global Catastrophe</strong>
+                        <p>Threatens human civilization. Global climate effects and mass casualties.</p>
                     </div>
                 </div>
             </div>
@@ -1459,6 +1481,7 @@
                 <p class="short-text">How we detect and protect Earth from asteroid impacts.</p>
                 <div class="full-text">
                         <p>NASA and international space agencies actively track near-Earth objects to identify potential threats decades in advance. Detection methods include ground-based telescopes and space missions like NEOWISE. If a threat is identified, several mitigation strategies exist: kinetic impactor (like NASA's DART mission that successfully redirected an asteroid in 2022), gravity tractor (using a spacecraft's gravity to slowly pull an asteroid off course), and nuclear deflection as a last resort. Early detection is crucial - the earlier we spot a threat, the easier and cheaper it is to deflect.</p>
+                        <p>For more comprehensive information on space safety and planetary defense, visit the <a href="https://www.esa.int/Space_Safety" target="_blank" style="color: #7dd3fc; text-decoration: none;">ESA Space Safety Programme</a>.</p>
                 </div>
                 <button class="read-more-btn" onclick="toggleText(this)">Read More</button>
             </div>
@@ -1506,7 +1529,7 @@
             </div>
             
             <div style="background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5rem;">
-                <h3 style="margin: 0 0 1rem; font-size: 1.1rem; font-weight: 400;">Reentry Emissions Growth to 2040</h3>
+                <h3 style="margin: 0 0 1rem; font-size: 1.1rem; font-weight: 400;">Reentry Emissions Growth to 2040 (Estimated)</h3>
                 <svg width="100%" height="250" viewBox="0 0 600 250" style="max-width: 100%;">
                     <defs>
                         <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -1605,7 +1628,7 @@
 
         <div class="simulator-link">
             <h2>Asteroid Impact Simulator</h2>
-            <p style="margin-bottom: 2rem; color: #999999;">Experience realistic asteroid impact scenarios and understand potential consequences. Adjust parameters like size, velocity, composition, and impact angle to see how different asteroids would affect Earth.</p>
+            <p style="margin-bottom: 2rem; color: #999999;">Real-time asteroid distance tracking and collision simulation. Adjust parameters like size, velocity, composition, and impact angle to see how different asteroids would affect Earth.</p>
             <a href="simulator.html" class="simulator-btn" target="_blank">Launch Asteroid Impact Simulator</a>
         </div>
 
@@ -1616,6 +1639,7 @@
         </div>
 
         <div class="content-section" style="display: block;">
+            <h2 style="text-align: center; margin<div class="content-section" style="display: block;">
             <h2 style="text-align: center; margin-bottom: 2rem;">Why Use Our Simulators?</h2>
             
             <div class="content-grid">
@@ -1666,12 +1690,18 @@
         </div>
 
         <div style="background: #000000; border-radius: 8px; padding: 3rem 2rem; margin: 3rem 0; border: 1px solid #1a1a1a;">
-            <h2 style="text-align: center; margin-bottom: 3rem;">Team Members</h2>
-            
-            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 0 auto; max-width: 1100px;">
-                <div style="background: #0a0a0a; padding: 1.8rem 1.2rem; border-radius: 50%; width: 170px; height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #1a1a1a;">
-                    <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Emir Ibrahim Orcin</h4>
-                    <p style="color: #999; font-size: 0.75rem;">Website & Impact Model Designer</p>
+    <h2 style="text-align: center; margin-bottom: 2rem;">Team Members</h2>
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <img src="https://github.com/S0rryS0ren/Space-Overwatch/blob/main/Space%20Overwatch%20Team.jpg?raw=true" 
+             alt="Space Overwatch Team" 
+             style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #1a1a1a;">
+    </div>
+    
+    <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 0 auto; max-width: 1100px;">
+        <div style="background: #0a0a0a; padding: 1.8rem 1.2rem; border-radius: 50%; width: 170px; height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #1a1a1a;">
+            <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Emir Ibrahim Orcin</h4>
+            <p style="color: #999; font-size: 0.75rem;">Website & Impact Model Designer</p>
                 </div>
                 <div style="background: #0a0a0a; padding: 1.8rem 1.2rem; border-radius: 50%; width: 170px; height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #1a1a1a;">
                     <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem;">Franz de la Torre Westphal</h4>
@@ -1695,7 +1725,7 @@
         <div class="content-section" style="margin-top: 3rem;">
             <div class="content-text">
                 <h2>Our Origin</h2>
-                <p class="short-text">NASA Space Apps Challenge 2025 - Impactor-2025: A newly identified near-Earth asteroid poses a potential threat to Earth.</p>
+                <p class="short-text">NASA Space Apps Challenge 2025 - Meteor Madness </p>
                 <div class="full-text">
                     <p>The challenge asks: Do we have the tools to enable the public and decision makers to understand and mitigate asteroid risks? We're developing an interactive visualization and simulation tool that uses real NASA data to help users model asteroid impact scenarios, predict consequences, and evaluate potential mitigation strategies. NASA's Planetary Science Division provides critical datasets about known asteroids, while the USGS offers geological information for impact modeling.</p>
                 </div>
@@ -1722,9 +1752,9 @@
                 </div>
 
                 <div style="background: #000000; border: 1px solid #1a1a1a; border-radius: 8px; padding: 1.5rem;">
-                    <h3 style="color: #22c55e; margin-bottom: 1rem;">🔬 Independent Research</h3>
+                    <h3 style="color: #22c55e; margin-bottom: 1rem;">🔬 AI use aggregation</h3>
                     <p style="color: #b0b0b0; font-size: 0.95rem; line-height: 1.7;">
-                        Through our subscription-based platform, we fund independent research within our specialist community. We develop scientific solutions for atmospheric pollution from re-entry debris and advance asteroid deflection R&D using kinetic impactors.
+                        This platform offers an AI space news aggregator with a focus on the most recent atmospheric (re)entry events. In order to ensure comprehension by all age and education groups we use AI to reduce the amount of technical jargon, making news pieces more accessible to the general public.
                     </p>
                 </div>
 
@@ -1743,6 +1773,14 @@
             <a href="https://www.reddit.com/r/SpaceOverwatch/" class="simulator-btn" target="_blank">Join Our Community</a>
         </div>
    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Space Overwatch | NASA Space Apps Challenge Project</p>
+        <div class="ai-badge">
+            This website was created with the help of AI code generation (Claude 4.5 Sonnet)
+        </div>
+        <p style="margin-top: 1rem;">Protecting Earth from space hazards through education and awareness</p>
+    </footer>
 
     <script>
         window.addEventListener('scroll', function() {
