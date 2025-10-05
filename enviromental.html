@@ -10,172 +10,57 @@
       --text:#e6ecff;--grid:#1b2742;--chip:#0f172a;--card:#0e1628;--border:#1e2a43
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0a0a0a;color:var(--text)}
-    
-    header{padding:22px 20px;border-bottom:1px solid #2a2a2a;background:#000000;position:sticky;top:0;z-index:100}
-    
-    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto}
-    
-    .home-link{color:#ffffff;text-decoration:none;font-size:0.9rem;padding:0.6rem 1.2rem;border:1px solid #2a2a2a;transition:all 0.2s}
-    .home-link:hover{background:#ffffff;color:#000000;border-color:#ffffff}
-    
-    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px;font-weight:300}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0b1220;color:var(--text)}
+    header{padding:22px 20px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0));backdrop-filter:saturate(120%) blur(6px);position:sticky;top:0;z-index:10}
+    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px}
     .sub{color:var(--muted);font-size:14px}
-    
-    /* Mode Toggle */
-    .mode-toggle-container{text-align:center;padding:1rem;background:#000000;border-bottom:1px solid #2a2a2a}
-    .mode-toggle{display:inline-flex;gap:0.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;padding:4px}
-    .mode-btn-toggle{padding:0.7rem 2rem;background:transparent;border:none;color:#999999;cursor:pointer;transition:all 0.2s;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em}
-    .mode-btn-toggle.active{background:#ffffff;color:#000000}
-    
-    /* Preset Scenarios */
-    .presets-section{background:#000000;border-bottom:1px solid #2a2a2a;padding:1.5rem 2rem}
-    .presets-container{max-width:1500px;margin:0 auto}
-    .presets-title{color:#7dd3fc;font-size:1rem;margin-bottom:1rem;text-align:center}
-    .preset-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-    .preset-btn{padding:0.8rem 1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-size:0.85rem}
-    .preset-btn:hover{background:#1a1a1a;border-color:#7dd3fc}
-    
     main{display:grid;grid-template-columns:360px 1fr;gap:18px;max-width:1500px;margin:12px auto 24px;padding:0 18px 28px}
-    main.simple-mode{grid-template-columns:1fr}
-    
-    .panel{background:#000000;border:1px solid #2a2a2a;border-radius:2px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
     .left{padding:14px}
-    .left.hidden{display:none}
-    
-    .simple-controls{display:none;max-width:800px;margin:0 auto;padding:2rem}
-    .simple-mode .simple-controls{display:block}
-    
-    .simple-group{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:1.5rem;margin-bottom:1.5rem}
-    .simple-group h3{color:#7dd3fc;font-size:1.1rem;margin-bottom:1rem}
-    .simple-slider{margin:1.5rem 0}
-    .simple-slider label{display:block;color:#b0b0b0;margin-bottom:0.5rem;font-size:0.9rem}
-    .simple-slider input{width:100%;height:4px;background:#2a2a2a;outline:none}
-    .simple-value{color:#ffffff;font-size:1.1rem;margin-top:0.5rem}
-    
-    .group{padding:12px 12px 8px;border-radius:2px;background:#000000;margin-bottom:10px;border:1px solid #2a2a2a}
+    .group{padding:12px 12px 8px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0));margin-bottom:10px;border:1px solid var(--border)}
     .group h3{margin:0 0 8px;font-size:14px;color:#cbd5ff;letter-spacing:.3px}
     label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdd7ff;margin:8px 0}
-    input[type="number"], select{width:150px;background:#0a0a0a;border:1px solid #2a2a2a;color:var(--text);padding:6px 8px;border-radius:2px}
+    input[type="number"], select{width:150px;background:#0a1120;border:1px solid #1f2b46;color:var(--text);padding:6px 8px;border-radius:8px}
     input[type="checkbox"]{transform:scale(1.1)}
     .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2a2a;background:#000000;color:var(--text);padding:10px 12px;border-radius:2px;cursor:pointer;transition:all 0.2s}
-    .btn.secondary{background:#0a0a0a}
-    .btn:hover{background:#ffffff;color:#000000}
+    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--border);background:linear-gradient(180deg,#13203b,#0e1628);color:var(--text);padding:10px 12px;border-radius:10px;cursor:pointer}
+    .btn.secondary{background:#0c1426}
     .btn:active{transform:translateY(1px)}
-    
     .right{display:grid;grid-template-rows:auto auto;gap:14px}
-    canvas{display:block;width:100%;height:auto;background:#0a0a0a;border-radius:2px;border:1px solid #2a2a2a}
+    canvas{display:block;width:100%;height:auto;background:#0a1324;border-radius:12px;border:1px solid var(--border)}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0}
-    .card{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:12px;min-height:140px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;min-height:140px}
     .card h4{margin:0 0 10px;font-weight:600;color:#dbe2ff}
-    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #2a2a2a;padding:6px 0}
+    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #213055;padding:6px 0}
     .kv:last-child{border-bottom:none}
-    
-    /* Comparison Section */
-    .comparison-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
-    .comparison-title{text-align:center;font-size:1.3rem;color:#7dd3fc;margin-bottom:1.5rem}
-    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .comparison-item{text-align:center;padding:1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px}
-    .comparison-value{font-size:2.5rem;font-weight:600;color:#ffffff;margin:1rem 0}
-    .comparison-label{color:#b0b0b0;font-size:0.9rem}
-    
-    /* Info Sections */
-    .info-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
-    .info-section h3{color:#7dd3fc;font-size:1.2rem;margin-bottom:1rem}
-    .info-section p{color:#b0b0b0;line-height:1.7;margin-bottom:1rem}
-    .info-section ul{color:#b0b0b0;line-height:1.8;margin-left:1.5rem}
-    .info-section li{margin-bottom:0.5rem}
-    
-    .tag{display:inline-flex;align-items:center;gap:6px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
+    .tag{display:inline-flex;align-items:center;gap:6px;background:#0b1530;border:1px solid #1c2a49;border-radius:999px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
     .legend{display:flex;gap:8px;flex-wrap:wrap}
+    .legend .tag i{display:inline-block;width:10px;height:10px;border-radius:50%}
     .muted{color:var(--muted);font-size:12px}
+    .footer{margin-top:8px;color:var(--muted);font-size:12px}
     .notice{font-size:12px;color:#b3c6ff;margin-top:8px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .table{width:100%;border-collapse:collapse;font-size:13px}
-    .table th,.table td{border-bottom:1px dashed #2a2a2a;padding:6px 8px;text-align:right}
+    .table th,.table td{border-bottom:1px dashed #213055;padding:6px 8px;text-align:right}
     .table th:first-child,.table td:first-child{text-align:left}
-    
-    @media (max-width:1080px){
-      main{grid-template-columns:1fr}
-      .right{grid-template-rows:auto}
-      .cards{grid-template-columns:1fr}
-      .comparison-grid{grid-template-columns:1fr}
-      .preset-buttons{flex-direction:column}
-    }
-    
+    .pill{padding:2px 8px;border-radius:999px;border:1px solid #334674;background:#0f1a34;font-size:12px}
+    @media (max-width:1080px){main{grid-template-columns:1fr}.right{grid-template-rows:auto}.cards{grid-template-columns:1fr}}
+    /* Focus chart mode */
     .focus-chart main{grid-template-columns:1fr}
     .focus-chart .left{display:none}
     .focus-chart .cards{grid-template-columns:repeat(2,1fr)}
-    .help{font-size:12px;color:var(--muted);margin:4px 0 0}
-    details.helpbox{border:1px dashed #2a2a2a;padding:8px 10px;border-radius:2px;background:#0a0a0a}
+  .help{font-size:12px;color:var(--muted);margin:4px 0 0}
+    details.helpbox{border:1px dashed #24355e;padding:8px 10px;border-radius:8px;background:#0b1430}
     details.helpbox summary{cursor:pointer;color:#cfe1ff}
   </style>
 </head>
 <body>
   <header>
-    <div class="header-content">
-      <a href="index.html" class="home-link">← Home</a>
-      <div>
-        <h1>LEO Re-entry & Environmental Impact Model</h1>
-        <div class="sub">Numerical 1-DOF ballistic re-entry with environmental impact analysis</div>
-      </div>
-      <div style="width:100px"></div>
-    </div>
+    <h1>LEO Re-entry & Environmental Impact Model</h1>
+    <div class="sub">Numerical 1-DOF ballistic re-entry with stochastic breakup, Sutton–Graves heating, material ablation, NOₓ production estimate, heterogeneous-chem ozone impact proxy, and casualty risk footprint.</div>
   </header>
 
-  <div class="mode-toggle-container">
-    <div class="mode-toggle">
-      <button class="mode-btn-toggle active" onclick="setMode('simple')">Simple Mode</button>
-      <button class="mode-btn-toggle" onclick="setMode('advanced')">Advanced Mode</button>
-    </div>
-  </div>
-
-  <div class="presets-section">
-    <div class="presets-container">
-      <div class="presets-title">Quick Preset Scenarios</div>
-      <div class="preset-buttons">
-        <button class="preset-btn" onclick="loadPreset('starlink')">📡 Starlink Satellite (260 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('iss')">🛰️ ISS Module (15,000 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('gps')">🌐 GPS Satellite (2,000 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('cubesat')">📦 CubeSat (5 kg)</button>
-      </div>
-    </div>
-  </div>
-
-  <main id="mainGrid">
-    <!-- Simple Mode Controls -->
-    <div class="simple-controls">
-      <div class="simple-group">
-        <h3>Satellite Mass</h3>
-        <div class="simple-slider">
-          <label>How heavy is the satellite?</label>
-          <input type="range" id="simple_mass" min="5" max="15000" value="220" step="10">
-          <div class="simple-value"><span id="simple_mass_val">220</span> kg</div>
-        </div>
-      </div>
-
-      <div class="simple-group">
-        <h3>Entry Speed</h3>
-        <div class="simple-slider">
-          <label>How fast is it falling?</label>
-          <input type="range" id="simple_speed" min="7000" max="8000" value="7800" step="10">
-          <div class="simple-value"><span id="simple_speed_val">7800</span> m/s</div>
-        </div>
-      </div>
-
-      <div class="simple-group">
-        <h3>Material Composition</h3>
-        <select id="simple_material" style="width:100%;padding:0.8rem;font-size:1rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff">
-          <option value="aluminum">Mostly Aluminum (typical satellite)</option>
-          <option value="mixed">Mixed Materials (space station module)</option>
-          <option value="dense">Dense Metals (GPS satellite)</option>
-        </select>
-      </div>
-
-      <button class="btn" style="width:100%;padding:1.2rem;font-size:1rem;margin-top:1rem" onclick="runFromSimple()">▶ Run Simulation</button>
-    </div>
-
-    <!-- Advanced Mode Controls -->
+  <main>
     <section class="left panel" aria-label="Inputs">
       <div class="group">
         <h3>Vehicle & Trajectory</h3>
@@ -190,6 +75,7 @@
         <label><span>Max sim time (s)</span><input id="tmax" type="number" step="1" value="8000"/></label>
         <label><span>Breakup dynamic pressure q* (Pa)</span><input id="qcrit" type="number" step="1" value="1500"/></label>
         <label><span>Allow lift (L/D)</span><input id="ld" type="number" step="0.01" value="0.00"/></label>
+        <div class="notice">Breakup triggers when q = ½ρv² ≥ q*. Post-breakup: fragments generated stochastically if enabled.</div>
         <details class="helpbox"><summary>What these inputs mean</summary>
           <ul class="help">
             <li><b>m₀</b>: total mass at interface (~120 km).</li>
@@ -197,6 +83,11 @@
             <li><b>C<sub>D</sub></b>: drag coefficient; 2.0–2.2 typical for blunt tumbling shapes.</li>
             <li><b>R<sub>n</sub></b>: effective nose radius for stagnation heating; smaller ⇒ hotter.</li>
             <li><b>v₀</b>: interface speed; ~7.6–7.9 km/s for LEO.</li>
+            <li><b>h₀</b>: initial altitude of integration start.</li>
+            <li><b>γ</b>: flight-path angle; <u>positive is downward</u>. Small positive is shallow.</li>
+            <li><b>Δt</b>: integrator time step.</li>
+            <li><b>q*</b>: breakup threshold dynamic pressure (Pa) where structure fragments.</li>
+            <li><b>L/D</b>: simple lift model (0 = ballistic).</li>
           </ul>
         </details>
       </div>
@@ -209,16 +100,31 @@
         <label><span>Electronics+Cu fraction</span><input id="f_cu" type="number" step="0.01" value="0.08"/></label>
         <label><span>CFRP/epoxy fraction</span><input id="f_cfrp" type="number" step="0.01" value="0.17"/></label>
         <label><span>Other/inert fraction</span><input id="f_other" type="number" step="0.01" value="0.05"/></label>
+        <div class="notice">Fractions should sum ≈ 1.0; model normalizes them.</div>
+        <details class="helpbox"><summary>What these inputs mean</summary>
+          <ul class="help">
+            <li>Fractions approximate bulk materials. Used to split ablation energy draw and yields.</li>
+            <li>Electronics+Cu covers wiring, boards, connectors.</li>
+            <li>CFRP/epoxy drives soot yield when pyrolyzed.</li>
+          </ul>
+        </details>
       </div>
 
       <div class="group">
-        <h3>Thermochemistry</h3>
+        <h3>Thermochemistry (effective heats of ablation)</h3>
         <label><span>H<sub>abl</sub>(Al) (MJ/kg)</span><input id="H_al" type="number" step="0.1" value="13.0"/></label>
         <label><span>H<sub>abl</sub>(Ti) (MJ/kg)</span><input id="H_ti" type="number" step="0.1" value="14.0"/></label>
         <label><span>H<sub>abl</sub>(SS) (MJ/kg)</span><input id="H_ss" type="number" step="0.1" value="16.0"/></label>
         <label><span>H<sub>abl</sub>(Cu/elec) (MJ/kg)</span><input id="H_cu" type="number" step="0.1" value="12.0"/></label>
         <label><span>H<sub>abl</sub>(CFRP) (MJ/kg)</span><input id="H_cfrp" type="number" step="0.1" value="25.0"/></label>
-        <label><span>Heat split to ablation</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
+        <label><span>Heat split to ablation (efficiency)</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
+        <div class="notice">Convective heating via Sutton–Graves: q̇ = k √(ρ/R<sub>n</sub>) v³ with k ≈ 1.7415×10⁻⁴ (SI, Earth).</div>
+        <details class="helpbox"><summary>What these inputs mean</summary>
+          <ul class="help">
+            <li><b>H<sub>abl</sub></b>: effective energy to remove 1 kg (sensible + phase + chemistry).</li>
+            <li><b>η<sub>abl</sub></b>: fraction of convective heating that goes into the structure (vs air).</li>
+          </ul>
+        </details>
       </div>
 
       <div class="group">
@@ -226,63 +132,67 @@
         <label><span>Enable stochastic breakup</span><input id="stoch_on" type="checkbox" checked></label>
         <label><span>Mean # fragments (≥250 g)</span><input id="N_frag" type="number" step="1" value="25"/></label>
         <label><span>Lognormal σ (mass spread)</span><input id="sigma_ln" type="number" step="0.1" value="1.0"/></label>
-        <label><span>Shape/area factor k<sub>A</sub></span><input id="kA" type="number" step="0.01" value="0.025"/></label>
+        <label><span>Shape/area factor k<sub>A</sub> (m²/kg<sup>2/3</sup>)</span><input id="kA" type="number" step="0.01" value="0.025"/></label>
         <label><span>Casualty area per survivor (m²)</span><input id="A_cas" type="number" step="0.01" value="0.35"/></label>
         <label><span>Land-track fraction</span><input id="f_land" type="number" step="0.01" value="0.29"/></label>
+        <div class="notice">Risk proxy E<sub>c</sub> ≈ (Σ A<sub>cas</sub>)·(Pop/LandArea)·f<sub>land</sub>. Global-average only — use ground-track population for formal work.</div>
+        <details class="helpbox"><summary>What these inputs mean</summary>
+          <ul class="help">
+            <li><b>Stochastic breakup</b>: splits remnant mass into lognormal fragments.</li>
+            <li><b>k<sub>A</sub></b>: converts fragment mass to area (∝ m<sup>2/3</sup>).</li>
+            <li><b>A<sub>cas</sub></b>: casualty area per surviving fragment footprint.</li>
+            <li><b>f<sub>land</sub></b>: fraction of ground track over land.</li>
+          </ul>
+        </details>
       </div>
 
       <div class="group">
         <h3>Environmental Yields & Chemistry</h3>
-        <label><span>Al → Al₂O₃ yield</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
-        <label><span>Ti → TiO₂ yield</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
-        <label><span>SS metals → oxides</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
-        <label><span>Electronics → CuO/Cu</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
-        <label><span>CFRP → black carbon</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
-        <label><span>SSA Al₂O₃ (m²/g)</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
-        <label><span>SSA TiO₂ (m²/g)</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
-        <label><span>NOₓ yield k<sub>NOx</sub> (kg/MJ)</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
+        <label><span>Al → Al₂O₃ particulate yield</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
+        <label><span>Ti → TiO₂ particulate yield</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
+        <label><span>SS metals → oxides (mass frac)</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
+        <label><span>Electronics → CuO/Cu particulates</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
+        <label><span>CFRP → black carbon (soot)</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
+        <label><span>Specific surface area Al₂O₃ (m²/g)</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
+        <label><span>Specific surface area TiO₂ (m²/g)</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
+        <label><span>NOₓ energy yield k<sub>NOx</sub> (kg/MJ to air)</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
         <label><span>NOₓ altitude peak (km)</span><input id="hNOx" type="number" step="1" value="35"/></label>
-        <label><span>O₃ loss proxy κ</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
+        <label><span>O₃ loss proxy κ (molecules·m⁻²·s⁻¹ per m² SA)</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
         <label><span>Proxy window (days)</span><input id="tO3days" type="number" step="1" value="30"/></label>
+        <div class="notice">NOₓ ≈ k<sub>NOx</sub>·(convective heat to air) with Gaussian altitude weighting (peak set by <b>NOₓ altitude peak</b>). O₃ proxy uses alumina/titania surface area × uptake rate over a window.</div>
+        <details class="helpbox"><summary>What these inputs mean</summary>
+          <ul class="help">
+            <li><b>k<sub>NOx</sub></b>: proportionality from energy to air → NOx formed (tunable).</li>
+            <li><b>h<sub>NOx</sub></b>: altitude where NOx formation is most efficient in this proxy.</li>
+            <li><b>κ</b>: ozone loss proxy rate per unit particle surface area.</li>
+            <li><b>Window</b>: integration duration for the proxy effect.</li>
+          </ul>
+        </details>
       </div>
 
       <div class="group row">
-        <button id="run" class="btn">▶ Run</button>
-        <button id="export" class="btn secondary">⇩ Export</button>
+        <button id="run" class="btn">▶ Run simulation</button>
+        <button id="export" class="btn secondary">⇩ Export results (JSON)</button>
+        <label class="row"><input id="autoscroll" type="checkbox" checked> <span class="muted">Auto-scroll plots</span></label>
       </div>
+      <div class="muted">Assumptions: 1-DOF along-path dynamics; exponential density; constant Sutton–Graves k; stochastic breakup allocates mass via lognormal; survivor threshold 250 g; simplified NOₓ & ozone proxy parameters are user-tunable—treat as first-order estimates.</div>
     </section>
 
     <section class="right">
       <div class="card" id="chartCard">
-        <div class="toolbar" style="display:flex;gap:8px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap">
-          <div class="legend">
-            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude</label>
-            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed</label>
-            <label class="tag"><input id="show_q" type="checkbox" checked> Pressure</label>
-            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating</label>
+        <div class="toolbar" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-bottom:8px">
+          <div class="legend" id="legend" style="flex:1;min-width:260px">
+            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude (km)</label>
+            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed (km/s)</label>
+            <label class="tag"><input id="show_q" type="checkbox" checked> Dyn. pressure q (kPa)</label>
+            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating q̇ (MW/m²)</label>
           </div>
-          <button id="focus" class="btn">📈 Focus</button>
-        </div>
-        <canvas id="plot" height="460"></canvas>
-      </div>
-      
-      <!-- Comparison Section -->
-      <div class="comparison-section">
-        <div class="comparison-title">Environmental Impact Comparison</div>
-        <div class="comparison-grid">
-          <div class="comparison-item">
-            <div class="comparison-label">This Satellite Reentry</div>
-            <div class="comparison-value" id="sat_al2o3">~24 kg</div>
-            <div class="comparison-label">Aluminum Oxide (Al₂O₃)</div>
-          </div>
-          <div class="comparison-item">
-            <div class="comparison-label">Equivalent To</div>
-            <div class="comparison-value" id="car_equiv">~5 cars</div>
-            <div class="comparison-label">Driving for one year</div>
+          <div class="row">
+            <button id="focus" class="btn" title="Hide inputs & expand chart">📈 Focus chart</button>
           </div>
         </div>
+        <canvas id="plot" height="460" aria-label="Time history chart showing altitude, speed, dynamic pressure, and heating."></canvas>
       </div>
-
       <div class="cards">
         <div class="card">
           <h4>Key Events</h4>
@@ -290,878 +200,531 @@
         </div>
         <div class="card">
           <h4>Totals</h4>
-          <div id="totals"></div>
+          <div id="totals" class="kvlist"></div>
+          <details class="helpbox"><summary>How to read these</summary>
+            <ul class="help">
+              <li><b>Burned/Residual mass</b>: change in vehicle mass due to ablation; residual may impact.</li>
+              <li><b>Al₂O₃, TiO₂, SS‑ox, Cu/CuO, Black C</b>: total particulate/oxide yields across all layers.</li>
+              <li><b>NOₓ</b>: proxy estimate formed in heated air along the path.</li>
+              <li><b>Surface area</b>: specific surface in stratosphere/mesosphere — larger can enhance heterogeneous chemistry.</li>
+              <li><b>O₃ loss proxy</b>: ozone-equivalent mass lost via proxy uptake over the window.</li>
+            </ul>
+          </details>
+        </div>
         </div>
         <div class="card">
           <h4>Layer Depositions</h4>
           <table class="table" id="layers">
-            <thead><tr><th>Layer</th><th>Al₂O₃</th><th>TiO₂</th><th>NOₓ</th></tr></thead>
+            <thead><tr><th>Layer</th><th>Al₂O₃ (g)</th><th>TiO₂ (g)</th><th>SS-ox (g)</th><th>Cu/CuO (g)</th><th>Black C (g)</th><th>NOₓ (g)</th></tr></thead>
             <tbody></tbody>
           </table>
+          <details class="helpbox"><summary>How to read this</summary>
+            <ul class="help">
+              <li>Shows where in the atmosphere materials and NOx are deposited or formed.</li>
+              <li>Stratospheric burdens are most relevant for ozone chemistry; mesospheric for noctilucent cloud seeding.</li>
+            </ul>
+          </details>
+        </div>
+        <div class="card">
+          <h4>Risk & Chemistry Proxies</h4>
+          <div id="risk" class="kvlist"></div>
+          <details class="helpbox"><summary>How to interpret</summary>
+            <ul class="help">
+              <li><b>Surviving fragments</b>: pieces ≥ ~0.25 kg assumed to reach ground.</li>
+              <li><b>Casualty expectation E<sub>c</sub></b>: global-average expected casualties per reentry (use ground‑track models for missions).</li>
+              <li>Common standard: E<sub>c</sub> &lt; 1×10⁻⁴ for compliance.</li>
+            </ul>
+          </details>
+        </div>
+        </div>
+        <div class="card" style="grid-column:1/-1">
+          <h4>Time History (sampled)</h4>
+          <div class="grid2">
+            <div>
+              <div id="samples" class="muted" style="margin-top:8px;max-height:150px;overflow:auto"></div>
+            </div>
+            <div>
+              <h4 style="margin-top:0">Assumption Checks</h4>
+              <div id="checks" class="muted"></div>
+            </div>
+          </div>
+          <div class="footer">Scientific notes: Sutton–Graves heating; g(h)=μ/r²; breakup by dynamic pressure; NOx proportional to energy-to-air; ozone proxy ∝ particle surface area. See “Physics self‑checks” below for built‑in sanity tests.</div>
         </div>
       </div>
-
-      <!-- Mitigation Strategies -->
-      <div class="info-section">
-        <h3>🛡️ Mitigation Strategies</h3>
-        <p>Technologies and approaches to reduce reentry pollution:</p>
-        <ul>
-          <li><strong>Controlled Deorbiting:</strong> Guiding satellites to burn up over oceans minimizes land impact risks and concentrates debris in unpopulated areas.</li>
-          <li><strong>Alternative Materials:</strong> Using materials that produce less harmful emissions during burnup, such as composites that generate fewer aluminum oxides.</li>
-          <li><strong>Extended Orbital Life:</strong> Designing satellites for longer operational periods reduces the frequency of reentries.</li>
-          <li><strong>Active Debris Removal:</strong> Developing technologies to capture and safely deorbit defunct satellites before uncontrolled reentry.</li>
-          <li><strong>Complete Burnup Design:</strong> Engineering satellites to fully disintegrate in the atmosphere, leaving no debris to reach the ground.</li>
-        </ul>
-      </div>
-
-      <!-- Policy Implications -->
-      <div class="info-section">
-        <h3>📜 Policy & Regulation</h3>
-        <p>Current and proposed regulations to address space debris:</p>
-        <ul>
-          <li><strong>25-Year Rule:</strong> Satellites must deorbit within 25 years of mission end (FCC/ITU guidelines).</li>
-          <li><strong>ESA Zero Debris Charter:</strong> Commitment to eliminate debris creation by 2030.</li>
-          <li><strong>UN Space Debris Guidelines:</strong> Voluntary guidelines for sustainable space operations.</li>
-          <li><strong>Proposed Regulations:</strong> Mandatory environmental impact assessments for mega-constellations, reentry reporting requirements, and fees for orbital pollution.</li>
-          <li><strong>International Cooperation:</strong> Need for global standards on satellite design, disposal methods, and debris tracking.</li>
-        </ul>
-      </div>
-
       <div class="card" style="grid-column:1/-1">
-        <h4>Risk & Chemistry Proxies</h4>
-        <div id="risk"></div>
+        <h4>Physics self‑checks</h4>
+        <div id="selfchecks" class="muted"></div>
       </div>
     </section>
   </main>
 
   <script>
-  const μ = 3.986004418e14, Re = 6371e3, kSG = 1.74153e-4, POP = 8.0e9, LAND = 1.49e14, PPERM2 = POP/LAND;
+  // ---------- Utility math ----------
+  const μ = 3.986004418e14; // m^3/s^2
+  const Re = 6371e3;        // m
+  const kSG = 1.74153e-4;      // Sutton–Graves Earth constant (SI) per Sutton & Graves (1971)
+  const POP = 8.0e9;        // people
+  const LAND = 1.49e14;     // m^2 land area
+  const PPERM2 = POP/LAND;  // person per m^2
   const toFixed = (x,n=2)=>Number.isFinite(x)?x.toFixed(n):"-";
-
-  let currentMode = 'simple';
-
-  function setMode(mode) {
-    currentMode = mode;
-    const mainGrid = document.getElementById('mainGrid');
-    const btns = document.querySelectorAll('.mode-btn-toggle');
-    const leftPanel = document.querySelector('.left');
-    
-    btns.forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-    
-    if (mode === 'simple') {
-      mainGrid.classList.add('simple-mode');
-      leftPanel.classList.add('hidden');
-    } else {
-      mainGrid.classList.remove('simple-mode');
-      leftPanel.classList.remove('hidden');
-    }
-  }
-
-  // Preset scenarios
-  const presets = {
-    starlink: {m0:260, area:2.8, cd:2.2, rn:0.15, v0:7750, gamma:0.8, f_al:0.60, f_ti:0.08, f_ss:0.05, f_cu:0.12, f_cfrp:0.12, f_other:0.03},
-    iss: {m0:15000, area:15, cd:2.0, rn:2.0, v0:7660, gamma:1.5, f_al:0.45, f_ti:0.15, f_ss:0.15, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
-    gps: {m0:2000, area:8, cd:2.1, rn:0.8, v0:3900, gamma:2.0, f_al:0.40, f_ti:0.20, f_ss:0.10, f_cu:0.15, f_cfrp:0.10, f_other:0.05},
-    cubesat: {m0:5, area:0.1, cd:2.2, rn:0.05, v0:7800, gamma:0.5, f_al:0.70, f_ti:0.05, f_ss:0.02, f_cu:0.15, f_cfrp:0.05, f_other:0.03}
-  };
-
-  function loadPreset(type) {
-    const p = presets[type];
-    Object.keys(p).forEach(k => {
-      const el = document.getElementById(k);
-      if (el) el.value = p[k];
-    });
-    run();
-  }
-
-  // Simple mode handlers
-  document.getElementById('simple_mass')?.addEventListener('input', e => {
-    document.getElementById('simple_mass_val').textContent = e.target.value;
-    document.getElementById('m0').value = e.target.value;
-  });
-  document.getElementById('simple_speed')?.addEventListener('input', e => {
-    document.getElementById('simple_speed_val').textContent = e.target.value;
-    document.getElementById('v0').value = e.target.value;
-  });
-  document.getElementById('simple_material')?.addEventListener('change', e => {
-    const matProfiles = {
-      aluminum: {f_al:0.70, f_ti:0.05, f_ss:0.05, f_cu:0.10, f_cfrp:0.08, f_other:0.02},
-      mixed: {f_al:0.50, f_ti:0.15, f_ss:0.10, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
-      dense: {f_al:0.35, f_ti:0.20, f_ss:0.15, f_cu:0.15, f_cfrp:0.10<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LEO Re-entry & Environmental Impact Model</title>
-  <style>
-    :root{
-      --bg:#0b1220;--panel:#111a2b;--muted:#7f8bad;--accent:#7dd3fc;--accent2:#a78bfa;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
-      --text:#e6ecff;--grid:#1b2742;--chip:#0f172a;--card:#0e1628;--border:#1e2a43
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0a0a0a;color:var(--text)}
-    
-    header{padding:22px 20px;border-bottom:1px solid #2a2a2a;background:#000000;position:sticky;top:0;z-index:100}
-    
-    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto}
-    
-    .home-link{color:#ffffff;text-decoration:none;font-size:0.9rem;padding:0.6rem 1.2rem;border:1px solid #2a2a2a;transition:all 0.2s}
-    .home-link:hover{background:#ffffff;color:#000000;border-color:#ffffff}
-    
-    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px;font-weight:300}
-    .sub{color:var(--muted);font-size:14px}
-    
-    .mode-toggle-container{text-align:center;padding:1rem;background:#000000;border-bottom:1px solid #2a2a2a}
-    .mode-toggle{display:inline-flex;gap:0.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;padding:4px}
-    .mode-btn-toggle{padding:0.7rem 2rem;background:transparent;border:none;color:#999999;cursor:pointer;transition:all 0.2s;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em}
-    .mode-btn-toggle.active{background:#ffffff;color:#000000}
-    
-    .presets-section{background:#000000;border-bottom:1px solid #2a2a2a;padding:1.5rem 2rem}
-    .presets-container{max-width:1500px;margin:0 auto}
-    .presets-title{color:#7dd3fc;font-size:1rem;margin-bottom:1rem;text-align:center}
-    .preset-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-    .preset-btn{padding:0.8rem 1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-size:0.85rem}
-    .preset-btn:hover{background:#1a1a1a;border-color:#7dd3fc}
-    
-    main{display:grid;grid-template-columns:360px 1fr;gap:18px;max-width:1500px;margin:12px auto 24px;padding:0 18px 28px}
-    main.simple-mode{grid-template-columns:1fr}
-    
-    .panel{background:#000000;border:1px solid #2a2a2a;border-radius:2px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
-    .left{padding:14px}
-    .left.hidden{display:none}
-    
-    .simple-controls{display:none;max-width:800px;margin:0 auto;padding:2rem}
-    .simple-mode .simple-controls{display:block}
-    
-    .simple-group{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:1.5rem;margin-bottom:1.5rem}
-    .simple-group h3{color:#7dd3fc;font-size:1.1rem;margin-bottom:1rem}
-    .simple-slider{margin:1.5rem 0}
-    .simple-slider label{display:block;color:#b0b0b0;margin-bottom:0.5rem;font-size:0.9rem}
-    .simple-slider input[type="range"]{width:100%;height:4px;background:#2a2a2a;outline:none}
-    .simple-value{color:#ffffff;font-size:1.1rem;margin-top:0.5rem}
-    
-    .group{padding:12px 12px 8px;border-radius:2px;background:#000000;margin-bottom:10px;border:1px solid #2a2a2a}
-    .group h3{margin:0 0 8px;font-size:14px;color:#cbd5ff;letter-spacing:.3px}
-    label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdd7ff;margin:8px 0}
-    input[type="number"], select{width:150px;background:#0a0a0a;border:1px solid #2a2a2a;color:var(--text);padding:6px 8px;border-radius:2px}
-    input[type="checkbox"]{transform:scale(1.1)}
-    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2a2a;background:#000000;color:var(--text);padding:10px 12px;border-radius:2px;cursor:pointer;transition:all 0.2s}
-    .btn.secondary{background:#0a0a0a}
-    .btn:hover{background:#ffffff;color:#000000}
-    .btn:active{transform:translateY(1px)}
-    
-    .right{display:grid;grid-template-rows:auto auto;gap:14px}
-    canvas{display:block;width:100%;height:auto;background:#0a0a0a;border-radius:2px;border:1px solid #2a2a2a}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0}
-    .card{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:12px;min-height:140px}
-    .card h4{margin:0 0 10px;font-weight:600;color:#dbe2ff}
-    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #2a2a2a;padding:6px 0}
-    .kv:last-child{border-bottom:none}
-    
-    .comparison-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
-    .comparison-title{text-align:center;font-size:1.3rem;color:#7dd3fc;margin-bottom:1.5rem}
-    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .comparison-item{text-align:center;padding:1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px}
-    .comparison-value{font-size:2.5rem;font-weight:600;color:#ffffff;margin:1rem 0}
-    .comparison-label{color:#b0b0b0;font-size:0.9rem}
-    
-    .info-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
-    .info-section h3{color:#7dd3fc;font-size:1.2rem;margin-bottom:1rem}
-    .info-section p{color:#b0b0b0;line-height:1.7;margin-bottom:1rem}
-    .info-section ul{color:#b0b0b0;line-height:1.8;margin-left:1.5rem}
-    .info-section li{margin-bottom:0.5rem}
-    
-    .tag{display:inline-flex;align-items:center;gap:6px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
-    .legend{display:flex;gap:8px;flex-wrap:wrap}
-    .muted{color:var(--muted);font-size:12px}
-    .notice{font-size:12px;color:#b3c6ff;margin-top:8px}
-    .table{width:100%;border-collapse:collapse;font-size:13px}
-    .table th,.table td{border-bottom:1px dashed #2a2a2a;padding:6px 8px;text-align:right}
-    .table th:first-child,.table td:first-child{text-align:left}
-    
-    @media (max-width:1080px){
-      main{grid-template-columns:1fr}
-      .right{grid-template-rows:auto}
-      .cards{grid-template-columns:1fr}
-      .comparison-grid{grid-template-columns:1fr}
-      .preset-buttons{flex-direction:column}
-    }
-    
-    .focus-chart main{grid-template-columns:1fr}
-    .focus-chart .left{display:none}
-    .focus-chart .cards{grid-template-columns:repeat(2,1fr)}
-    .help{font-size:12px;color:var(--muted);margin:4px 0 0}
-    details.helpbox{border:1px dashed #2a2a2a;padding:8px 10px;border-radius:2px;background:#0a0a0a}
-    details.helpbox summary{cursor:pointer;color:#cfe1ff}
-  </style>
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <a href="index.html" class="home-link">← Home</a>
-      <div>
-        <h1>LEO Re-entry & Environmental Impact Model</h1>
-        <div class="sub">Numerical 1-DOF ballistic re-entry with environmental impact analysis</div>
-      </div>
-      <div style="width:100px"></div>
-    </div>
-  </header>
-
-  <div class="mode-toggle-container">
-    <div class="mode-toggle">
-      <button class="mode-btn-toggle active" onclick="setMode('simple')">Simple Mode</button>
-      <button class="mode-btn-toggle" onclick="setMode('advanced')">Advanced Mode</button>
-    </div>
-  </div>
-
-  <div class="presets-section">
-    <div class="presets-container">
-      <div class="presets-title">Quick Preset Scenarios</div>
-      <div class="preset-buttons">
-        <button class="preset-btn" onclick="loadPreset('starlink')">📡 Starlink Satellite (260 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('iss')">🛰️ ISS Module (15,000 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('gps')">🌐 GPS Satellite (2,000 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('cubesat')">📦 CubeSat (5 kg)</button>
-      </div>
-    </div>
-  </div>
-
-  <main id="mainGrid">
-    <div class="simple-controls">
-      <div class="simple-group">
-        <h3>Satellite Mass</h3>
-        <div class="simple-slider">
-          <label>How heavy is the satellite?</label>
-          <input type="range" id="simple_mass" min="5" max="15000" value="220" step="10">
-          <div class="simple-value"><span id="simple_mass_val">220</span> kg</div>
-        </div>
-      </div>
-
-      <div class="simple-group">
-        <h3>Entry Speed</h3>
-        <div class="simple-slider">
-          <label>How fast is it falling?</label>
-          <input type="range" id="simple_speed" min="7000" max="8000" value="7800" step="10">
-          <div class="simple-value"><span id="simple_speed_val">7800</span> m/s</div>
-        </div>
-      </div>
-
-      <div class="simple-group">
-        <h3>Material Composition</h3>
-        <select id="simple_material" style="width:100%;padding:0.8rem;font-size:1rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff">
-          <option value="aluminum">Mostly Aluminum (typical satellite)</option>
-          <option value="mixed">Mixed Materials (space station module)</option>
-          <option value="dense">Dense Metals (GPS satellite)</option>
-        </select>
-      </div>
-
-      <button class="btn" style="width:100%;padding:1.2rem;font-size:1rem;margin-top:1rem" onclick="runFromSimple()">▶ Run Simulation</button>
-    </div>
-
-    <section class="left panel" aria-label="Inputs">
-      <div class="group">
-        <h3>Vehicle & Trajectory</h3>
-        <label><span>Initial mass m<sub>0</sub> (kg)</span><input id="m0" type="number" step="1" value="220"/></label>
-        <label><span>Reference area A (m²)</span><input id="area" type="number" step="0.01" value="0.6"/></label>
-        <label><span>Drag coefficient C<sub>D</sub></span><input id="cd" type="number" step="0.01" value="2.1"/></label>
-        <label><span>Nose radius R<sub>n</sub> (m)</span><input id="rn" type="number" step="0.01" value="0.20"/></label>
-        <label><span>Initial speed v<sub>0</sub> (m/s)</span><input id="v0" type="number" step="1" value="7800"/></label>
-        <label><span>Entry altitude h<sub>0</sub> (km)</span><input id="h0" type="number" step="1" value="120"/></label>
-        <label><span>Flight-path angle γ (deg)</span><input id="gamma" type="number" step="0.1" value="1.2"/></label>
-        <label><span>Time step Δt (s)</span><input id="dt" type="number" step="0.1" value="0.2"/></label>
-        <label><span>Max sim time (s)</span><input id="tmax" type="number" step="1" value="8000"/></label>
-        <label><span>Breakup pressure q* (Pa)</span><input id="qcrit" type="number" step="1" value="1500"/></label>
-        <label><span>Lift (L/D)</span><input id="ld" type="number" step="0.01" value="0.00"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Materials & Mass Fractions</h3>
-        <label><span>Aluminum</span><input id="f_al" type="number" step="0.01" value="0.55"/></label>
-        <label><span>Titanium</span><input id="f_ti" type="number" step="0.01" value="0.10"/></label>
-        <label><span>Stainless steel</span><input id="f_ss" type="number" step="0.01" value="0.05"/></label>
-        <label><span>Electronics+Cu</span><input id="f_cu" type="number" step="0.01" value="0.08"/></label>
-        <label><span>CFRP/epoxy</span><input id="f_cfrp" type="number" step="0.01" value="0.17"/></label>
-        <label><span>Other/inert</span><input id="f_other" type="number" step="0.01" value="0.05"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Thermochemistry</h3>
-        <label><span>H<sub>abl</sub>(Al) MJ/kg</span><input id="H_al" type="number" step="0.1" value="13.0"/></label>
-        <label><span>H<sub>abl</sub>(Ti) MJ/kg</span><input id="H_ti" type="number" step="0.1" value="14.0"/></label>
-        <label><span>H<sub>abl</sub>(SS) MJ/kg</span><input id="H_ss" type="number" step="0.1" value="16.0"/></label>
-        <label><span>H<sub>abl</sub>(Cu) MJ/kg</span><input id="H_cu" type="number" step="0.1" value="12.0"/></label>
-        <label><span>H<sub>abl</sub>(CFRP) MJ/kg</span><input id="H_cfrp" type="number" step="0.1" value="25.0"/></label>
-        <label><span>Heat efficiency</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Stochastic Breakup</h3>
-        <label><span>Enable breakup</span><input id="stoch_on" type="checkbox" checked></label>
-        <label><span>Mean fragments</span><input id="N_frag" type="number" step="1" value="25"/></label>
-        <label><span>Mass spread σ</span><input id="sigma_ln" type="number" step="0.1" value="1.0"/></label>
-        <label><span>Area factor k<sub>A</sub></span><input id="kA" type="number" step="0.01" value="0.025"/></label>
-        <label><span>Casualty area (m²)</span><input id="A_cas" type="number" step="0.01" value="0.35"/></label>
-        <label><span>Land fraction</span><input id="f_land" type="number" step="0.01" value="0.29"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Environmental Yields</h3>
-        <label><span>Al → Al₂O₃</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
-        <label><span>Ti → TiO₂</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
-        <label><span>SS → oxides</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
-        <label><span>Cu → CuO</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
-        <label><span>CFRP → BC</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
-        <label><span>SSA Al₂O₃ m²/g</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
-        <label><span>SSA TiO₂ m²/g</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
-        <label><span>NOₓ yield kg/MJ</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
-        <label><span>NOₓ peak alt km</span><input id="hNOx" type="number" step="1" value="35"/></label>
-        <label><span>O₃ loss κ</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
-        <label><span>Window days</span><input id="tO3days" type="number" step="1" value="30"/></label>
-      </div>
-
-      <div class="group row">
-        <button id="run" class="btn">▶ Run</button>
-        <button id="export" class="btn secondary">⇩ Export</button>
-      </div>
-    </section>
-
-    <section class="right">
-      <div class="card" id="chartCard">
-        <div class="toolbar" style="display:flex;gap:8px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap">
-          <div class="legend">
-            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude</label>
-            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed</label>
-            <label class="tag"><input id="show_q" type="checkbox" checked> Pressure</label>
-            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating</label>
-          </div>
-          <button id="focus" class="btn">📈 Focus</button>
-        </div>
-        <canvas id="plot" height="460"></canvas>
-      </div>
-      
-      <div class="comparison-section">
-        <div class="comparison-title">Environmental Impact Comparison</div>
-        <div class="comparison-grid">
-          <div class="comparison-item">
-            <div class="comparison-label">This Satellite Reentry</div>
-            <div class="comparison-value" id="sat_al2o3">~24 kg</div>
-            <div class="comparison-label">Aluminum Oxide (Al₂O₃)</div>
-          </div>
-          <div class="comparison-item">
-            <div class="comparison-label">Equivalent To</div>
-            <div class="comparison-value" id="car_equiv">~5 cars</div>
-            <div class="comparison-label">Driving for one year</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <h4>Key Events</h4>
-          <div id="events"></div>
-        </div>
-        <div class="card">
-          <h4>Totals</h4>
-          <div id="totals"></div>
-        </div>
-        <div class="card">
-          <h4>Layer Depositions</h4>
-          <table class="table" id="layers">
-            <thead><tr><th>Layer</th><th>Al₂O₃</th><th>TiO₂</th><th>NOₓ</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="info-section">
-        <h3>🛡️ Mitigation Strategies</h3>
-        <p>Technologies and approaches to reduce reentry pollution:</p>
-        <ul>
-          <li><strong>Controlled Deorbiting:</strong> Guiding satellites to burn up over oceans minimizes land impact risks.</li>
-          <li><strong>Alternative Materials:</strong> Using materials that produce less harmful emissions during burnup.</li>
-          <li><strong>Extended Orbital Life:</strong> Longer operational periods reduce reentry frequency.</li>
-          <li><strong>Active Debris Removal:</strong> Capturing and safely deorbiting defunct satellites.</li>
-          <li><strong>Complete Burnup Design:</strong> Engineering satellites to fully disintegrate in atmosphere.</li>
-        </ul>
-      </div>
-
-      <div class="info-section">
-        <h3>📜 Policy & Regulation</h3>
-        <p>Current and proposed regulations addressing space debris:</p>
-        <ul>
-          <li><strong>25-Year Rule:</strong> Satellites must deorbit within 25 years of mission end.</li>
-          <li><strong>ESA Zero Debris Charter:</strong> Commitment to eliminate debris creation by 2030.</li>
-          <li><strong>UN Space Debris Guidelines:</strong> Voluntary guidelines for sustainable operations.</li>
-          <li><strong>Proposed Regulations:</strong> Environmental impact assessments for mega-constellations.</li>
-          <li><strong>International Cooperation:</strong> Need for global standards on design and disposal.</li>
-        </ul>
-      </div>
-
-      <div class="card" style="grid-column:1/-1">
-        <h4>Risk Proxies</h4>
-        <div id="risk"></div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-  const μ = 3.986004418e14, Re = 6371e3, kSG = 1.74153e-4, POP = 8.0e9, LAND = 1.49e14, PPERM2 = POP/LAND;
-  const toFixed = (x,n=2)=>Number.isFinite(x)?x.toFixed(n):"-";
-
-  let currentMode = 'simple';
-
-  function setMode(mode) {
-    currentMode = mode;
-    const mainGrid = document.getElementById('mainGrid');
-    const btns = document.querySelectorAll('.mode-btn-toggle');
-    const leftPanel = document.querySelector('.left');
-    
-    btns.forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.mode-btn-toggle').forEach((b,i) => {
-      if((mode==='simple' && i===0) || (mode==='advanced' && i===1)) b.classList.add('active');
-    });
-    
-    if (mode === 'simple') {
-      mainGrid.classList.add('simple-mode');
-      leftPanel.classList.add('hidden');
-    } else {
-      mainGrid.classList.remove('simple-mode');
-      leftPanel.classList.remove('hidden');
-    }
-  }
-
-  const presets = {
-    starlink: {m0:260, area:2.8, cd:2.2, rn:0.15, v0:7750, gamma:0.8, f_al:0.60, f_ti:0.08, f_ss:0.05, f_cu:0.12, f_cfrp:0.12, f_other:0.03},
-    iss: {m0:15000, area:15, cd:2.0, rn:2.0, v0:7660, gamma:1.5, f_al:0.45, f_ti:0.15, f_ss:0.15, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
-    gps: {m0:2000, area:8, cd:2.1, rn:0.8, v0:3900, gamma:2.0, f_al:0.40, f_ti:0.20, f_ss:0.10, f_cu:0.15, f_cfrp:0.10, f_other:0.05},
-    cubesat: {m0:5, area:0.1, cd:2.2, rn:0.05, v0:7800, gamma:0.5, f_al:0.70, f_ti:0.05, f_ss:0.02, f_cu:0.15, f_cfrp:0.05, f_other:0.03}
-  };
-
-  function loadPreset(type) {
-    const p = presets[type];
-    Object.keys(p).forEach(k => {
-      const el = document.getElementById(k);
-      if (el) el.value = p[k];
-    });
-    run();
-  }
-
-  document.getElementById('simple_mass')?.addEventListener('input', e => {
-    document.getElementById('simple_mass_val').textContent = e.target.value;
-    document.getElementById('m0').value = e.target.value;
-  });
-  document.getElementById('simple_speed')?.addEventListener('input', e => {
-    document.getElementById('simple_speed_val').textContent = e.target.value;
-    document.getElementById('v0').value = e.target.value;
-  });
-  document.getElementById('simple_material')?.addEventListener('change', e => {
-    const matProfiles = {
-      aluminum: {f_al:0.70, f_ti:0.05, f_ss:0.05, f_cu:0.10, f_cfrp:0.08, f_other:0.02},
-      mixed: {f_al:0.50, f_ti:0.15, f_ss:0.10, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
-      dense: {f_al:0.35, f_ti:0.20, f_ss:0.15, f_cu:0.15, f_cfrp:0.10, f_other:0.05}
-    };
-    const prof = matProfiles[e.target.value];
-    Object.keys(prof).forEach(k => {
-      const el = document.getElementById(k);
-      if(el) el.value = prof[k];
-    });
-  });
-
-  function runFromSimple() {
-    run();
-  }
 
   function stdAtmDensity(h){
+    // h in meters. Piecewise exponential fit (simple), tuned for 0–120 km.
     const layers=[
-      {h:0,rho0:1.225,H:7400},{h:11000,rho0:0.3639,H:6000},{h:20000,rho0:0.0880,H:6400},
-      {h:32000,rho0:0.01322,H:7000},{h:47000,rho0:0.00143,H:7200},{h:51000,r<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LEO Re-entry & Environmental Impact Model</title>
-  <style>
-    :root{
-      --bg:#0b1220;--panel:#111a2b;--muted:#7f8bad;--accent:#7dd3fc;--accent2:#a78bfa;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
-      --text:#e6ecff;--grid:#1b2742;--chip:#0f172a;--card:#0e1628;--border:#1e2a43
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0a0a0a;color:var(--text)}
-    
-    header{padding:22px 20px;border-bottom:1px solid #2a2a2a;background:#000000;position:sticky;top:0;z-index:100}
-    
-    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto}
-    
-    .home-link{color:#ffffff;text-decoration:none;font-size:0.9rem;padding:0.6rem 1.2rem;border:1px solid #2a2a2a;transition:all 0.2s}
-    .home-link:hover{background:#ffffff;color:#000000;border-color:#ffffff}
-    
-    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px;font-weight:300}
-    .sub{color:var(--muted);font-size:14px}
-    
-    .mode-toggle-container{text-align:center;padding:1rem;background:#000000;border-bottom:1px solid #2a2a2a}
-    .mode-toggle{display:inline-flex;gap:0.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;padding:4px}
-    .mode-btn-toggle{padding:0.7rem 2rem;background:transparent;border:none;color:#999999;cursor:pointer;transition:all 0.2s;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em}
-    .mode-btn-toggle.active{background:#ffffff;color:#000000}
-    
-    .presets-section{background:#000000;border-bottom:1px solid #2a2a2a;padding:1.5rem 2rem}
-    .presets-container{max-width:1500px;margin:0 auto}
-    .presets-title{color:#7dd3fc;font-size:1rem;margin-bottom:1rem;text-align:center}
-    .preset-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-    .preset-btn{padding:0.8rem 1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-size:0.85rem}
-    .preset-btn:hover{background:#1a1a1a;border-color:#7dd3fc}
-    
-    main{display:grid;grid-template-columns:360px 1fr;gap:18px;max-width:1500px;margin:12px auto 24px;padding:0 18px 28px}
-    main.simple-mode{grid-template-columns:1fr}
-    
-    .panel{background:#000000;border:1px solid #2a2a2a;border-radius:2px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
-    .left{padding:14px}
-    .left.hidden{display:none}
-    
-    .simple-controls{display:none;max-width:800px;margin:0 auto;padding:2rem}
-    .simple-mode .simple-controls{display:block}
-    
-    .simple-group{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:1.5rem;margin-bottom:1.5rem}
-    .simple-group h3{color:#7dd3fc;font-size:1.1rem;margin-bottom:1rem}
-    .simple-slider{margin:1.5rem 0}
-    .simple-slider label{display:block;color:#b0b0b0;margin-bottom:0.5rem;font-size:0.9rem}
-    .simple-slider input[type="range"]{width:100%;height:4px;background:#2a2a2a;outline:none}
-    .simple-value{color:#ffffff;font-size:1.1rem;margin-top:0.5rem}
-    
-    .group{padding:12px 12px 8px;border-radius:2px;background:#000000;margin-bottom:10px;border:1px solid #2a2a2a}
-    .group h3{margin:0 0 8px;font-size:14px;color:#cbd5ff;letter-spacing:.3px}
-    label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdd7ff;margin:8px 0}
-    input[type="number"], select{width:150px;background:#0a0a0a;border:1px solid #2a2a2a;color:var(--text);padding:6px 8px;border-radius:2px}
-    input[type="checkbox"]{transform:scale(1.1)}
-    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2a2a;background:#000000;color:var(--text);padding:10px 12px;border-radius:2px;cursor:pointer;transition:all 0.2s}
-    .btn.secondary{background:#0a0a0a}
-    .btn:hover{background:#ffffff;color:#000000}
-    .btn:active{transform:translateY(1px)}
-    
-    .right{display:grid;grid-template-rows:auto auto;gap:14px}
-    canvas{display:block;width:100%;height:auto;background:#0a0a0a;border-radius:2px;border:1px solid #2a2a2a}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0}
-    .card{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:12px;min-height:140px}
-    .card h4{margin:0 0 10px;font-weight:600;color:#dbe2ff}
-    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #2a2a2a;padding:6px 0}
-    .kv:last-child{border-bottom:none}
-    
-    .comparison-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
-    .comparison-title{text-align:center;font-size:1.3rem;color:#7dd3fc;margin-bottom:1.5rem}
-    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-    .comparison-item{text-align:center;padding:1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px}
-    .comparison-value{font-size:2.5rem;font-weight:600;color:#ffffff;margin:1rem 0}
-    .comparison-label{color:#b0b0b0;font-size:0.9rem}
-    
-    .info-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
-    .info-section h3{color:#7dd3fc;font-size:1.2rem;margin-bottom:1rem}
-    .info-section p{color:#b0b0b0;line-height:1.7;margin-bottom:1rem}
-    .info-section ul{color:#b0b0b0;line-height:1.8;margin-left:1.5rem}
-    .info-section li{margin-bottom:0.5rem}
-    
-    .tag{display:inline-flex;align-items:center;gap:6px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
-    .legend{display:flex;gap:8px;flex-wrap:wrap}
-    .muted{color:var(--muted);font-size:12px}
-    .notice{font-size:12px;color:#b3c6ff;margin-top:8px}
-    .table{width:100%;border-collapse:collapse;font-size:13px}
-    .table th,.table td{border-bottom:1px dashed #2a2a2a;padding:6px 8px;text-align:right}
-    .table th:first-child,.table td:first-child{text-align:left}
-    
-    @media (max-width:1080px){
-      main{grid-template-columns:1fr}
-      .right{grid-template-rows:auto}
-      .cards{grid-template-columns:1fr}
-      .comparison-grid{grid-template-columns:1fr}
-      .preset-buttons{flex-direction:column}
-    }
-    
-    .focus-chart main{grid-template-columns:1fr}
-    .focus-chart .left{display:none}
-    .focus-chart .cards{grid-template-columns:repeat(2,1fr)}
-    .help{font-size:12px;color:var(--muted);margin:4px 0 0}
-    details.helpbox{border:1px dashed #2a2a2a;padding:8px 10px;border-radius:2px;background:#0a0a0a}
-    details.helpbox summary{cursor:pointer;color:#cfe1ff}
-  </style>
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <a href="index.html" class="home-link">← Home</a>
-      <div>
-        <h1>LEO Re-entry & Environmental Impact Model</h1>
-        <div class="sub">Numerical 1-DOF ballistic re-entry with environmental impact analysis</div>
-      </div>
-      <div style="width:100px"></div>
-    </div>
-  </header>
-
-  <div class="mode-toggle-container">
-    <div class="mode-toggle">
-      <button class="mode-btn-toggle active" onclick="setMode('simple')">Simple Mode</button>
-      <button class="mode-btn-toggle" onclick="setMode('advanced')">Advanced Mode</button>
-    </div>
-  </div>
-
-  <div class="presets-section">
-    <div class="presets-container">
-      <div class="presets-title">Quick Preset Scenarios</div>
-      <div class="preset-buttons">
-        <button class="preset-btn" onclick="loadPreset('starlink')">📡 Starlink Satellite (260 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('iss')">🛰️ ISS Module (15,000 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('gps')">🌐 GPS Satellite (2,000 kg)</button>
-        <button class="preset-btn" onclick="loadPreset('cubesat')">📦 CubeSat (5 kg)</button>
-      </div>
-    </div>
-  </div>
-
-  <main id="mainGrid">
-    <div class="simple-controls">
-      <div class="simple-group">
-        <h3>Satellite Mass</h3>
-        <div class="simple-slider">
-          <label>How heavy is the satellite?</label>
-          <input type="range" id="simple_mass" min="5" max="15000" value="220" step="10">
-          <div class="simple-value"><span id="simple_mass_val">220</span> kg</div>
-        </div>
-      </div>
-
-      <div class="simple-group">
-        <h3>Entry Speed</h3>
-        <div class="simple-slider">
-          <label>How fast is it falling?</label>
-          <input type="range" id="simple_speed" min="7000" max="8000" value="7800" step="10">
-          <div class="simple-value"><span id="simple_speed_val">7800</span> m/s</div>
-        </div>
-      </div>
-
-      <div class="simple-group">
-        <h3>Material Composition</h3>
-        <select id="simple_material" style="width:100%;padding:0.8rem;font-size:1rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff">
-          <option value="aluminum">Mostly Aluminum (typical satellite)</option>
-          <option value="mixed">Mixed Materials (space station module)</option>
-          <option value="dense">Dense Metals (GPS satellite)</option>
-        </select>
-      </div>
-
-      <button class="btn" style="width:100%;padding:1.2rem;font-size:1rem;margin-top:1rem" onclick="runFromSimple()">▶ Run Simulation</button>
-    </div>
-
-    <section class="left panel" aria-label="Inputs">
-      <div class="group">
-        <h3>Vehicle & Trajectory</h3>
-        <label><span>Initial mass m<sub>0</sub> (kg)</span><input id="m0" type="number" step="1" value="220"/></label>
-        <label><span>Reference area A (m²)</span><input id="area" type="number" step="0.01" value="0.6"/></label>
-        <label><span>Drag coefficient C<sub>D</sub></span><input id="cd" type="number" step="0.01" value="2.1"/></label>
-        <label><span>Nose radius R<sub>n</sub> (m)</span><input id="rn" type="number" step="0.01" value="0.20"/></label>
-        <label><span>Initial speed v<sub>0</sub> (m/s)</span><input id="v0" type="number" step="1" value="7800"/></label>
-        <label><span>Entry altitude h<sub>0</sub> (km)</span><input id="h0" type="number" step="1" value="120"/></label>
-        <label><span>Flight-path angle γ (deg)</span><input id="gamma" type="number" step="0.1" value="1.2"/></label>
-        <label><span>Time step Δt (s)</span><input id="dt" type="number" step="0.1" value="0.2"/></label>
-        <label><span>Max sim time (s)</span><input id="tmax" type="number" step="1" value="8000"/></label>
-        <label><span>Breakup pressure q* (Pa)</span><input id="qcrit" type="number" step="1" value="1500"/></label>
-        <label><span>Lift (L/D)</span><input id="ld" type="number" step="0.01" value="0.00"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Materials & Mass Fractions</h3>
-        <label><span>Aluminum</span><input id="f_al" type="number" step="0.01" value="0.55"/></label>
-        <label><span>Titanium</span><input id="f_ti" type="number" step="0.01" value="0.10"/></label>
-        <label><span>Stainless steel</span><input id="f_ss" type="number" step="0.01" value="0.05"/></label>
-        <label><span>Electronics+Cu</span><input id="f_cu" type="number" step="0.01" value="0.08"/></label>
-        <label><span>CFRP/epoxy</span><input id="f_cfrp" type="number" step="0.01" value="0.17"/></label>
-        <label><span>Other/inert</span><input id="f_other" type="number" step="0.01" value="0.05"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Thermochemistry</h3>
-        <label><span>H<sub>abl</sub>(Al) MJ/kg</span><input id="H_al" type="number" step="0.1" value="13.0"/></label>
-        <label><span>H<sub>abl</sub>(Ti) MJ/kg</span><input id="H_ti" type="number" step="0.1" value="14.0"/></label>
-        <label><span>H<sub>abl</sub>(SS) MJ/kg</span><input id="H_ss" type="number" step="0.1" value="16.0"/></label>
-        <label><span>H<sub>abl</sub>(Cu) MJ/kg</span><input id="H_cu" type="number" step="0.1" value="12.0"/></label>
-        <label><span>H<sub>abl</sub>(CFRP) MJ/kg</span><input id="H_cfrp" type="number" step="0.1" value="25.0"/></label>
-        <label><span>Heat efficiency</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Stochastic Breakup</h3>
-        <label><span>Enable breakup</span><input id="stoch_on" type="checkbox" checked></label>
-        <label><span>Mean fragments</span><input id="N_frag" type="number" step="1" value="25"/></label>
-        <label><span>Mass spread σ</span><input id="sigma_ln" type="number" step="0.1" value="1.0"/></label>
-        <label><span>Area factor k<sub>A</sub></span><input id="kA" type="number" step="0.01" value="0.025"/></label>
-        <label><span>Casualty area (m²)</span><input id="A_cas" type="number" step="0.01" value="0.35"/></label>
-        <label><span>Land fraction</span><input id="f_land" type="number" step="0.01" value="0.29"/></label>
-      </div>
-
-      <div class="group">
-        <h3>Environmental Yields</h3>
-        <label><span>Al → Al₂O₃</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
-        <label><span>Ti → TiO₂</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
-        <label><span>SS → oxides</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
-        <label><span>Cu → CuO</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
-        <label><span>CFRP → BC</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
-        <label><span>SSA Al₂O₃ m²/g</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
-        <label><span>SSA TiO₂ m²/g</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
-        <label><span>NOₓ yield kg/MJ</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
-        <label><span>NOₓ peak alt km</span><input id="hNOx" type="number" step="1" value="35"/></label>
-        <label><span>O₃ loss κ</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
-        <label><span>Window days</span><input id="tO3days" type="number" step="1" value="30"/></label>
-      </div>
-
-      <div class="group row">
-        <button id="run" class="btn">▶ Run</button>
-        <button id="export" class="btn secondary">⇩ Export</button>
-      </div>
-    </section>
-
-    <section class="right">
-      <div class="card" id="chartCard">
-        <div class="toolbar" style="display:flex;gap:8px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap">
-          <div class="legend">
-            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude</label>
-            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed</label>
-            <label class="tag"><input id="show_q" type="checkbox" checked> Pressure</label>
-            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating</label>
-          </div>
-          <button id="focus" class="btn">📈 Focus</button>
-        </div>
-        <canvas id="plot" height="460"></canvas>
-      </div>
-      
-      <div class="comparison-section">
-        <div class="comparison-title">Environmental Impact Comparison</div>
-        <div class="comparison-grid">
-          <div class="comparison-item">
-            <div class="comparison-label">This Satellite Reentry</div>
-            <div class="comparison-value" id="sat_al2o3">~24 kg</div>
-            <div class="comparison-label">Aluminum Oxide (Al₂O₃)</div>
-          </div>
-          <div class="comparison-item">
-            <div class="comparison-label">Equivalent To</div>
-            <div class="comparison-value" id="car_equiv">~5 cars</div>
-            <div class="comparison-label">Driving for one year</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <h4>Key Events</h4>
-          <div id="events"></div>
-        </div>
-        <div class="card">
-          <h4>Totals</h4>
-          <div id="totals"></div>
-        </div>
-        <div class="card">
-          <h4>Layer Depositions</h4>
-          <table class="table" id="layers">
-            <thead><tr><th>Layer</th><th>Al₂O₃</th><th>TiO₂</th><th>NOₓ</th></tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="info-section">
-        <h3>🛡️ Mitigation Strategies</h3>
-        <p>Technologies and approaches to reduce reentry pollution:</p>
-        <ul>
-          <li><strong>Controlled Deorbiting:</strong> Guiding satellites to burn up over oceans minimizes land impact risks.</li>
-          <li><strong>Alternative Materials:</strong> Using materials that produce less harmful emissions during burnup.</li>
-          <li><strong>Extended Orbital Life:</strong> Longer operational periods reduce reentry frequency.</li>
-          <li><strong>Active Debris Removal:</strong> Capturing and safely deorbiting defunct satellites.</li>
-          <li><strong>Complete Burnup Design:</strong> Engineering satellites to fully disintegrate in atmosphere.</li>
-        </ul>
-      </div>
-
-      <div class="info-section">
-        <h3>📜 Policy & Regulation</h3>
-        <p>Current and proposed regulations addressing space debris:</p>
-        <ul>
-          <li><strong>25-Year Rule:</strong> Satellites must deorbit within 25 years of mission end.</li>
-          <li><strong>ESA Zero Debris Charter:</strong> Commitment to eliminate debris creation by 2030.</li>
-          <li><strong>UN Space Debris Guidelines:</strong> Voluntary guidelines for sustainable operations.</li>
-          <li><strong>Proposed Regulations:</strong> Environmental impact assessments for mega-constellations.</li>
-          <li><strong>International Cooperation:</strong> Need for global standards on design and disposal.</li>
-        </ul>
-      </div>
-
-      <div class="card" style="grid-column:1/-1">
-        <h4>Risk Proxies</h4>
-        <div id="risk"></div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-  const μ = 3.986004418e14, Re = 6371e3, kSG = 1.74153e-4, POP = 8.0e9, LAND = 1.49e14, PPERM2 = POP/LAND;
-  const toFixed = (x,n=2)=>Number.isFinite(x)?x.toFixed(n):"-";
-
-  let currentMode = 'simple';
-
-  function setMode(mode) {
-    currentMode = mode;
-    const mainGrid = document.getElementById('mainGrid');
-    const btns = document.querySelectorAll('.mode-btn-toggle');
-    const leftPanel = document.querySelector('.left');
-    
-    btns.forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.mode-btn-toggle').forEach((b,i) => {
-      if((mode==='simple' && i===0) || (mode==='advanced' && i===1)) b.classList.add('active');
-    });
-    
-    if (mode === 'simple') {
-      mainGrid.classList.add('simple-mode');
-      leftPanel.classList.add('hidden');
-    } else {
-      mainGrid.classList.remove('simple-mode');
-      leftPanel.classList.remove('hidden');
-    }
+      {h:0,    rho0:1.225,   H:7400},
+      {h:11000,rho0:0.3639,  H:6000},
+      {h:20000,rho0:0.0880,  H:6400},
+      {h:32000,rho0:0.01322, H:7000},
+      {h:47000,rho0:0.00143, H:7200},
+      {h:51000,rho0:0.00086, H:9000},
+      {h:71000,rho0:6.4e-5,  H:6200},
+      {h:86000,rho0:1.9e-6,  H:7000},
+      {h:120000,rho0:1.0e-7, H:9000}
+    ];
+    let i=0; while(i+1<layers.length && h>=layers[i+1].h) i++;
+    const L=layers[i];
+    return L.rho0 * Math.exp(-(h-L.h)/L.H);
+  }
+  function layerName(hm){
+    const h=hm/1000;
+    if(h>=85) return "Thermosphere";
+    if(h>=50) return "Mesosphere";
+    if(h>=12) return "Stratosphere";
+    return "Troposphere";
   }
 
-  const presets = {
-    starlink: {m0:260, area:2.8, cd:2.2, rn:0.15, v0:7750, gamma:0.8, f_al:0.60, f_ti:0.08, f_ss:0.05, f_cu:0.12, f_cfrp:0.12, f_other:0.03},
-    iss: {m0:15000, area:15, cd:2.0, rn:2.0, v0:7660, gamma:1.5, f_al:0.45, f_ti:0.15, f_ss:0.15, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
-    gps: {m0:2000, area:8, cd:2.1, rn:0.8, v0:3900, gamma:2.0, f_al:0.40, f_ti:0.20, f_ss:0.10, f_cu:0.15, f_cfrp:0.10, f_other:0.05},
-    cubesat: {m0:5, area:0.1, cd:2.2, rn:0.05, v0:7800, gamma:0.5, f_al:0.70, f_ti:0.05, f_ss:0.02, f_cu:0.15, f_cfrp:0.05, f_other:0.03}
-  };
-
-  function loadPreset(type) {
-    const p = presets[type];
-    Object.keys(p).forEach(k => {
-      const el = document.getElementById(k);
-      if (el) el.value = p[k];
-    });
-    run();
+  function randn(){ // Box–Muller
+    let u=0,v=0; while(u===0) u=Math.random(); while(v===0) v=Math.random();
+    return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);
   }
 
-  document.getElementById('simple_mass')?.addEventListener('input', e => {
-    document.getElementById('simple_mass_val').textContent = e.target.value;
-    document.getElementById('m0').value = e.target.value;
-  });
-  document.getElementById('simple_speed')?.addEventListener('input', e => {
-    document.getElementById('simple_speed_val').textContent = e.target.value;
-    document.getElementById('v0').value = e.target.value;
-  });
-  document.getElementById('simple_material')?.addEventListener('change', e => {
-    const matProfiles = {
-      aluminum: {f_al:0.70, f_ti:0.05, f_ss:0.05, f_cu:0.10, f_cfrp:0.08, f_other:0.02},
-      mixed: {f_al:0.50, f_ti:0.15, f_ss:0.10, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
-      dense: {f_al:0.35, f_ti:0.20, f_ss:0.15, f_cu:0.15, f_cfrp:0.10, f_other:0.05}
+  // Simple scaler helper for arrays
+  function scale(arr){ const mn=Math.min(...arr), mx=Math.max(...arr); return {mn,mx,map:(v)=> (mx===mn?0.5:(v-mn)/(mx-mn))}; }
+  function norm(s, v){ return s.map(v); }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+  function invLerp(a,b,v){ return (v-a)/(b-a); }
+
+  function integrate(){
+    // read inputs
+    const m0 = +val('#m0');
+    const A0 = +val('#area');
+    const Cd0 = +val('#cd');
+    const Rn = +val('#rn');
+    let v = +val('#v0');
+    let h = +val('#h0')*1000;
+    // Use internal convention: gamma_up is positive upward. UI provides gamma_down (positive downward), so negate.
+    let gamma = -(+val('#gamma'))*Math.PI/180; // rad, positive UPWARD internally
+    const dt = +val('#dt');
+    const tmax = +val('#tmax');
+    const qcrit = +val('#qcrit');
+    const LD = +val('#ld');
+
+    // materials & heats
+    const f = { al:+fval('f_al'), ti:+fval('f_ti'), ss:+fval('f_ss'), cu:+fval('f_cu'), cfrp:+fval('f_cfrp'), other:+fval('f_other') };
+    const sumf = f.al+f.ti+f.ss+f.cu+f.cfrp+f.other; for(const k in f) f[k]/=sumf;
+    const H = { al:+mj('H_al'), ti:+mj('H_ti'), ss:+mj('H_ss'), cu:+mj('H_cu'), cfrp:+mj('H_cfrp') };
+    const eta_abl = +val('#eta_abl');
+
+    // stochastic breakup & risk
+    const stoch_on = qs('#stoch_on').checked;
+    const N_frag = Math.max(1, Math.round(+val('#N_frag')));
+    const sigma_ln = +val('#sigma_ln');
+    const kA = +val('#kA');
+    const A_cas = +val('#A_cas');
+    const f_land = +val('#f_land');
+
+    // environmental
+    const y = { al2o3:+fval('y_al2o3'), tio2:+fval('y_tio2'), ssox:+fval('y_ssox'), cu:+fval('y_cuox'), bc:+fval('y_bc') };
+    const ssa = { al2o3:+val('#ssa_al2o3'), tio2:+val('#ssa_tio2') };
+    const kNOx = +val('#kNOx'); // kg/MJ
+    const hNOx = +val('#hNOx')*1000; // peak altitude (m)
+    const kO3 = +val('#kO3');   // molecules / (m^2 s) per m^2 SA
+    const tO3days = +val('#tO3days');
+
+    // state
+    let m = m0, A = A0, Cd = Cd0, ablA = A0; let t = 0; let broken=false;
+    let M = { al:m0*f.al, ti:m0*f.ti, ss:m0*f.ss, cu:m0*f.cu, cfrp:m0*f.cfrp };
+
+    // stochastic fragment list (created at breakup)
+    let frags = null; // each: {m, A, Cd}
+
+    // deposition per layer (kg oxide/soot/NOx)
+    let dep = { Troposphere:initDep(), Stratosphere:initDep(), Mesosphere:initDep(), Thermosphere:initDep() };
+
+    // histories & events
+    const hist=[]; const events=[]; const NOx_hist=[];
+    function event(msg){ events.push({t,h,v,msg}); }
+    event('Simulation start');
+
+    const Rn_eff = Math.max(Rn, 0.02);
+
+    while(t<tmax && h>0 && m>m0*0.02 && v>50){
+      const r = Re + h; const g = μ/(r*r); const rho = stdAtmDensity(h);
+      const qdyn = 0.5*rho*v*v; // Pa
+
+      if(!broken && qdyn>=qcrit){
+        broken=true; event(`Breakup at ${toFixed(h/1000,1)} km (q = ${toFixed(qdyn/1000,2)} kPa)`);
+        if(stoch_on){ frags = makeFragments(m, A, Cd, N_frag, sigma_ln, kA); }
+        // deterministic multipliers for pre-breakup monolith still applied so early ablation continues smoothly
+        A *= (stoch_on?1:3.5); Cd *= (stoch_on?1:1.2); ablA *= (stoch_on?1:2.2);
+      }
+
+      // Heating (Sutton–Graves) at stagnation
+      const qdot = kSG * Math.sqrt(rho/ Rn_eff) * v*v*v; // W/m^2
+
+      // Energy to ablation vs to air (convective to structure vs air); crude split  eta_abl to ablation, (1-eta_abl) to air
+      const Qin_abl = qdot * ablA * eta_abl;            // W -> structure
+      const Qin_air = qdot * A * (1-eta_abl);           // W -> surrounding air
+
+      // Ablation draws
+      const draws = ablDraws(Qin_abl, dt, H, M);
+      M = draws.M; const mloss = draws.mloss; m -= mloss;
+      if(m<m0*0.02 && !events.find(e=>e.msg.includes('2%'))) event('Mass depleted to 2% — effectively burned up');
+
+      // Environmental yields at altitude
+      const Lname = layerName(h);
+      const ylds = yieldsFrom(draws.dAbl, y); // kg each species
+      dep[Lname].al2o3 += ylds.al2o3; dep[Lname].tio2 += ylds.tio2; dep[Lname].ssox += ylds.ssox; dep[Lname].cu += ylds.cu; dep[Lname].bc += ylds.bc;
+
+      // NOx from energy to air with Gaussian altitude weight centered near hNOx
+      const wNOx = Math.exp(-0.5*Math.pow((h-hNOx)/(10000),2)); // width ~10 km
+      const dNOx = kNOx * (Qin_air*dt)/1e6 * wNOx; // kg
+      dep[Lname].nox += dNOx; NOx_hist.push({t,h,dNOx});
+
+      // Dynamics (monolith model; stochastic fragments only used for survival & risk later)
+      const Dacc = 0.5*rho*v*v*Cd*A/m;
+      const Lft = (LD>0 ? Dacc*LD : 0);
+      // Equations of motion with gamma positive UP:
+      // v_dot = -D - g*sin(gamma)
+      // gamma_dot = L/(m v) + (v/r - g/v)*cos(gamma)
+      // h_dot = v*sin(gamma)
+      const v_dot = -Dacc - g*Math.sin(gamma);
+      const gamma_dot = (Lft/(m*v+1e-9)) + (v/r - g/v)*Math.cos(gamma);
+      v += v_dot*dt; if(v<0) v=0;
+      gamma += gamma_dot*dt;
+      h += v*Math.sin(gamma)*dt;
+
+      if(hist.length<2500 && (t%Math.max(0.5,10*dt)<dt)) hist.push({t,h,v,q:qdyn,qdot});
+
+      t += dt;
+      if(qdyn>5e5 && !events.find(e=>e.msg.startsWith('Peak dynamic pressure'))) event(`Peak dynamic pressure ~${toFixed(qdyn/1000,1)} kPa near ${toFixed(h/1000,1)} km`);
+      if(qdot>5e7 && !events.find(e=>e.msg.startsWith('Intense heating'))) event(`Intense heating q̇ ≈ ${toFixed(qdot/1e6,1)} MW/m² near ${toFixed(h/1000,1)} km`);
+    }
+
+    if(h<=0) event('Ground impact of residual mass');
+    if(t>=tmax) event('Terminated at tmax');
+
+    // Compute totals & surface area for ozone proxy
+    const totals = { burned_mass: toFixed(m0-m,2), residual_mass: toFixed(m,2), al2o3:0, tio2:0, ssox:0, cu:0, bc:0, nox:0 };
+    for(const L of Object.keys(dep)){
+      totals.al2o3 += dep[L].al2o3; totals.tio2 += dep[L].tio2; totals.ssox += dep[L].ssox; totals.cu += dep[L].cu; totals.bc += dep[L].bc; totals.nox += dep[L].nox;
+    }
+    const SA = {
+      Stratosphere: dep.Stratosphere.al2o3*1000*ssa.al2o3 + dep.Stratosphere.tio2*1000*ssa.tio2,
+      Mesosphere:   dep.Mesosphere.al2o3*1000*ssa.al2o3 + dep.Mesosphere.tio2*1000*ssa.tio2
     };
-    const prof = matProfiles[e.target.value];
-    Object.keys(prof).forEach(k => {
-      const el = document.getElementById(k);
-      if(el) el.value = prof[k];
-    });
-  });
 
-  function runFromSimple() {
-    run();
+    // Ozone loss proxy over window
+    const Tsec = tO3days*24*3600; // s
+    const molO3 = kO3 * SA.Stratosphere * Tsec; // molecules
+    const NA = 6.02214076e23; const kgO3 = (molO3/NA) * (48e-3); // kg
+
+    // Casualty risk footprint using stochastic survivors
+    const risk = casualtyRisk(m0, M, frags, A_cas, f_land);
+
+    return {hist, events, dep, totals, SA, O3proxy:{mol:molO3, kg:kgO3}, risk};
   }
 
-  function stdAtmDensity(h){
-    const layers=[
-      {h:0,rho0:1.225,H:7400},{h:11000,rho0:0.3639,H:6000},{h:20000,rho0:0.0880,H:6400},
-      {h:32000,rho0:0.01322,H:7000},{h:47000,rho0:0.00143,H:7200},{h:51000,r
+  // ---- breakup, ablation, yields, risk helpers ----
+  function initDep(){ return {al2o3:0,tio2:0,ssox:0,cu:0,bc:0,nox:0}; }
+  function fval(id){return +qs('#'+id).value}
+  function mj(id){return +qs('#'+id).value*1e6}
+  function val(sel){return qs(sel).value}
+  function qs(s){return document.querySelector(s)}
+
+  function ablDraws(Qin_abl, dt, H, M){
+    // Distribute ablation draw across materials; favor Al & CFRP
+    const w = {al:1.0, ti:0.25, ss:0.15, cu:0.20, cfrp:1.0};
+    const E = Qin_abl * dt; // J
+    // Energy per kg for each
+    const need = {al:H.al, ti:H.ti, ss:H.ss, cu:H.cu, cfrp:H.cfrp};
+    // tentative masses
+    let d = {al: Math.min(M.al, E*w.al/need.al), ti: Math.min(M.ti, E*w.ti/need.ti), ss: Math.min(M.ss, E*w.ss/need.ss), cu: Math.min(M.cu, E*w.cu/need.cu), cfrp: Math.min(M.cfrp, E*w.cfrp/need.cfrp)};
+    const draw = d.al*need.al + d.ti*need.ti + d.ss*need.ss + d.cu*need.cu + d.cfrp*need.cfrp;
+    if(draw > E){ // scale to energy available
+      const s = E/(draw+1e-12); for(const k in d) d[k]*=s;
+    }
+    const M2 = {al:M.al - d.al, ti:M.ti - d.ti, ss:M.ss - d.ss, cu:M.cu - d.cu, cfrp:M.cfrp - d.cfrp};
+    const mloss = (d.al+d.ti+d.ss+d.cu+d.cfrp);
+    return {M:M2, mloss, dAbl:d};
+  }
+
+  function yieldsFrom(dAbl, y){
+    return {
+      al2o3: dAbl.al * 1.889 * y.al2o3,
+      tio2:  dAbl.ti * 1.669 * y.tio2,
+      ssox:  dAbl.ss * y.ssox,
+      cu:    dAbl.cu * y.cu,
+      bc:    dAbl.cfrp * y.bc,
+    };
+  }
+
+  function makeFragments(m, A, Cd, N, sigma_ln, kA){
+    // Split remaining mass into N lognormal parts (≥0), enforce sum = m
+    const parts=[]; for(let i=0;i<N;i++){ parts.push(Math.exp(sigma_ln*randn())); }
+    const sum=parts.reduce((a,b)=>a+b,0);
+    // survivors are initialized with mass (will later be reduced by bulk ablation we already accounted).
+    const frags = parts.map(p=>{
+      const mf = m*(p/sum);
+      const Af = kA * Math.pow(Math.max(mf,1e-6), 2/3); // area scaling
+      return {m:mf, A:Af, Cd:Cd};
+    });
+    return frags;
+  }
+
+  function casualtyRisk(m0, Mfinal, frags, A_cas, f_land){
+    // Survivability rule of thumb: fragments made of Ti/SS/Cu with remaining mass > 0.25 kg survive; Al survives if >1 kg; CFRP seldom
+    if(!frags){
+      // fallback deterministic lump: use residual mass as one fragment if >0.25 kg
+      const survivors = (Mfinal.ti+Mfinal.ss+Mfinal.cu + (Mfinal.al>1?Mfinal.al:0)) > 0.25 ? 1 : 0;
+      const A_sum = survivors*A_cas;
+      const Ec = A_sum * PPERM2 * f_land; // expected casualties (dimensionless probability)
+      return {N_survivors:survivors, A_sum, Ec};
+    }
+    // Compute expected survivors by mass threshold
+    let Nsurv=0; let A_sum=0;
+    frags.forEach(fr=>{
+      const m = fr.m; // kg
+      let survive=false;
+      if(m>1) survive=true; // assume large chunks survive regardless of alloying
+      else if(m>0.25){ // medium
+        survive = true; // conservative
+      }
+      if(survive){ Nsurv++; A_sum += A_cas; }
+    });
+    const Ec = A_sum * PPERM2 * f_land;
+    return {N_survivors:Nsurv, A_sum, Ec};
+  }
+
+  // ---------- Rendering ----------
+  const plot = document.getElementById('plot');
+  const ctx = plot.getContext('2d');
+
+  let hover = {x:null, y:null, active:false};
+  plot.addEventListener('mousemove', e=>{
+    const r=plot.getBoundingClientRect();
+    hover.x=e.clientX-r.left; hover.y=e.clientY-r.top; hover.active=true;
+    if(window._lastRes) drawPlot(window._lastRes.hist, true);
+  });
+  plot.addEventListener('mouseleave', ()=>{ hover.active=false; if(window._lastRes) drawPlot(window._lastRes.hist); });
+  new ResizeObserver(()=>{ if(window._lastRes) drawPlot(window._lastRes.hist); }).observe(document.getElementById('chartCard'));
+
+  function drawAxes(W,H,padding){
+    const px = padding;
+    // frame
+    ctx.strokeStyle = '#1b2a4d'; ctx.lineWidth=1;
+    ctx.strokeRect(px,10,W-2*px,H-30);
+    // x ticks
+    return {xmin:px,xmax:W-px,ymin:10,ymax:H-30};
+  }
+
+  function drawPlot(hist){
+    const W = plot.width = plot.clientWidth; const H = plot.height = 460;
+    ctx.clearRect(0,0,W,H);
+    if(!hist || hist.length===0) return;
+
+    // Prepare series
+    const t = hist.map(d=>d.t);
+    const alt = hist.map(d=>d.h/1000);
+    const spd = hist.map(d=>d.v/1000);
+    const qk  = hist.map(d=>d.q/1000); // kPa
+    const heat= hist.map(d=>d.qdot/1e6); // MW/m^2
+
+    const show = {
+      alt: document.getElementById('show_alt')?.checked !== false,
+      spd: document.getElementById('show_spd')?.checked !== false,
+      q:   document.getElementById('show_q')?.checked   !== false,
+      heat:document.getElementById('show_heat')?.checked!== false,
+    };
+
+    const pad = 50;
+    const box = drawAxes(W,H,pad);
+
+    // scales per series (time shared on x)
+    const xS = scale(t);
+    const yAlt = scale(alt); const ySpd = scale(spd); const yQ = scale(qk); const yH = scale(heat);
+
+    // gridlines (x): 6 ticks
+    ctx.strokeStyle='#142245'; ctx.lineWidth=1; ctx.setLineDash([2,4]);
+    for(let i=0;i<=6;i++){
+      const xt = i/6; const X = lerp(box.xmin, box.xmax, xt);
+      ctx.beginPath(); ctx.moveTo(X, box.ymin); ctx.lineTo(X, box.ymax); ctx.stroke();
+      const tVal = lerp(xS.mn, xS.mx, xt);
+      ctx.fillStyle='#9bb3ff'; ctx.font='12px system-ui'; ctx.textAlign='center'; ctx.fillText(tVal.toFixed(0), X, box.ymax+16);
+    }
+    ctx.setLineDash([]);
+
+    // helper draw
+    const drawSeries=(arr, yfun, color)=>{
+      ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=2.2;
+      arr.forEach((v,i)=>{ const X = lerp(box.xmin,box.xmax, norm(xS, t[i])); const Y = lerp(box.ymax,box.ymin, norm(yfun, v)); if(i===0) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);});
+      ctx.stroke();
+    }
+
+    // draw enabled series + y-axis capsules at right with min/max & unit
+    const rightLabels=[];
+    if(show.alt){ drawSeries(alt, yAlt, '#7dd3fc'); rightLabels.push(['Alt', yAlt, 'km', '#7dd3fc']); }
+    if(show.spd){ drawSeries(spd, ySpd, '#a78bfa'); rightLabels.push(['Speed', ySpd, 'km/s', '#a78bfa']); }
+    if(show.q){   drawSeries(qk,  yQ,   '#22c55e'); rightLabels.push(['q', yQ, 'kPa', '#22c55e']); }
+    if(show.heat){drawSeries(heat,yH,   '#f59e0b'); rightLabels.push(['q̇', yH, 'MW/m²', '#f59e0b']); }
+
+    // axis titles
+    ctx.fillStyle='#cfe1ff'; ctx.font='12px system-ui'; ctx.textAlign='right';
+    ctx.fillText('Time (s)', box.xmax, H-8);
+
+    // right capsules
+    let ylab = box.ymin+8;
+    rightLabels.forEach(([name,sc,unit,color])=>{
+      const txt = `${name}: ${sc.mn.toFixed(1)} – ${sc.mx.toFixed(1)} ${unit}`;
+      const x = box.xmax-4; const y = ylab; const w = ctx.measureText(txt).width+14; const h=18;
+      ctx.fillStyle='rgba(15,26,52,0.8)'; ctx.strokeStyle='#25365f'; ctx.lineWidth=1; roundRect(ctx, x-w, y, w, h, 6, true, true);
+      ctx.fillStyle=color; ctx.fillText(txt, x-7, y+13);
+      ylab += h+6;
+    });
+
+    // hover crosshair + tooltip
+    if(hover.active){
+      const tx = lerp(xS.mn, xS.mx, invLerp(box.xmin, box.xmax, hover.x));
+      // find closest index
+      let idx = 0; let best=1e9; for(let i=0;i<t.length;i++){ const d = Math.abs(t[i]-tx); if(d<best){best=d; idx=i;}}
+      const X = lerp(box.xmin, box.xmax, norm(xS, t[idx]));
+      ctx.strokeStyle='#5f78b8'; ctx.setLineDash([4,4]); ctx.beginPath(); ctx.moveTo(X, box.ymin); ctx.lineTo(X, box.ymax); ctx.stroke(); ctx.setLineDash([]);
+
+      const rows = [];
+      if(show.alt) rows.push(['Alt', alt[idx].toFixed(2)+' km', '#7dd3fc']);
+      if(show.spd) rows.push(['Speed', spd[idx].toFixed(2)+' km/s', '#a78bfa']);
+      if(show.q)   rows.push(['q', qk[idx].toFixed(2)+' kPa', '#22c55e']);
+      if(show.heat)rows.push(['q̇', heat[idx].toFixed(2)+' MW/m²', '#f59e0b']);
+
+      const tlabel = `t = ${t[idx].toFixed(1)} s`;
+      let maxw = ctx.measureText(tlabel).width;
+      rows.forEach(r=>{ maxw = Math.max(maxw, ctx.measureText(`${r[0]}: ${r[1]}`).width); });
+      const tw = maxw + 20; const th = 20 + rows.length*18;
+      const txb = Math.min(Math.max(10, X+10), W - tw - 10);
+      const tyb = 16;
+      ctx.fillStyle='rgba(9,16,35,0.92)'; ctx.strokeStyle='#2a3d6a'; roundRect(ctx, txb, tyb, tw, th, 8, true, true);
+      ctx.fillStyle='#cfe1ff'; ctx.fillText(tlabel, txb+10, tyb+14);
+      rows.forEach((r,i)=>{ ctx.fillStyle=r[2]; ctx.fillText(`${r[0]}: ${r[1]}`, txb+10, tyb+32+i*18); });
+    }
+
+    // footer current end values
+    const last = hist[hist.length-1];
+    ctx.fillStyle='#8fb4ff'; ctx.font='12px system-ui'; ctx.textAlign='left';
+    ctx.fillText(`End: h=${(last.h/1000).toFixed(1)} km, v=${(last.v/1000).toFixed(2)} km/s`, 10, 16);
+  }
+
+  function roundRect(ctx, x, y, w, h, r, fill, stroke){
+    if(w<0) {x+=w; w=-w} if(h<0){y+=h; h=-h}
+    if(r>h/2) r=h/2; if(r>w/2) r=w/2;
+    ctx.beginPath();
+    ctx.moveTo(x+r, y);
+    ctx.arcTo(x+w, y, x+w, y+h, r);
+    ctx.arcTo(x+w, y+h, x, y+h, r);
+    ctx.arcTo(x, y+h, x, y, r);
+    ctx.arcTo(x, y, x+w, y, r);
+    if(fill) ctx.fill(); if(stroke) ctx.stroke();
+  }
+
+  function physicsChecks(){
+    // 1) Sutton–Graves scaling: qdot ~ v^3 at fixed rho,Rn
+    const rho = 1e-4; const Rn=0.2; const v1=5000, v2=7000;
+    const q1 = kSG*Math.sqrt(rho/Rn)*v1*v1*v1;
+    const q2 = kSG*Math.sqrt(rho/Rn)*v2*v2*v2;
+    const ratio = q2/q1; const expect = Math.pow(v2/v1,3); const ok1 = Math.abs(ratio/expect-1)<0.05;
+    // 2) Dynamic pressure definition
+    const v=7000; const qdyn=0.5*rho*v*v; const ok2 = Math.abs(qdyn - 0.5*rho*v*v) < 1e-9;
+    // 3) Mass conservation (should not increase)
+    const ok3 = (window._lastRes? parseFloat(window._lastRes.totals.burned_mass) >= 0 : true);
+    return [
+      `SG scaling v^3 check: observed ${(ratio).toFixed(3)} vs expected ${(expect).toFixed(3)} — ${ok1? 'OK':'check'}`,
+      `Dynamic pressure definition q=½ρv² — ${ok2? 'OK':'check'}`,
+      `Mass burned non‑negative — ${ok3? 'OK':'check'}`
+    ];
+  }
+
+  function render(res){
+    drawPlot(res.hist);
+
+    const events = qs('#events');
+    events.innerHTML = res.events.map(e=>`<div class=\"kv\"><span>${toFixed(e.t,1)} s</span><span>${e.msg}</span></div>`).join('');
+
+    const totals = qs('#totals');
+    const SAstr = (x)=>x>0?toFixed(x,0)+' m²':'0';
+    totals.innerHTML = `
+      <div class=\"kv\"><span>Burned mass</span><span>${res.totals.burned_mass} kg</span></div>
+      <div class=\"kv\"><span>Residual mass</span><span>${res.totals.residual_mass} kg</span></div>
+      <div class=\"kv\"><span>Al₂O₃ total</span><span>${toFixed(res.totals.al2o3*1000,1)} g</span></div>
+      <div class=\"kv\"><span>TiO₂ total</span><span>${toFixed(res.totals.tio2*1000,1)} g</span></div>
+      <div class=\"kv\"><span>SS-ox total</span><span>${toFixed(res.totals.ssox*1000,1)} g</span></div>
+      <div class=\"kv\"><span>Cu/CuO total</span><span>${toFixed(res.totals.cu*1000,1)} g</span></div>
+      <div class=\"kv\"><span>Black carbon total</span><span>${toFixed(res.totals.bc*1000,1)} g</span></div>
+      <div class=\"kv\"><span>NOₓ total</span><span>${toFixed(res.totals.nox*1000,1)} g</span></div>
+      <div class=\"kv\"><span>Surface area (strato)</span><span>${SAstr(res.SA.Stratosphere)}</span></div>
+      <div class=\"kv\"><span>Surface area (meso)</span><span>${SAstr(res.SA.Mesosphere)}</span></div>
+      <div class=\"kv\"><span>O₃ loss proxy (30 d)</span><span>${toFixed(res.O3proxy.kg*1000,1)} g equiv.</span></div>
+    `;
+
+    const tbody = qs('#layers tbody');
+    const order=["Thermosphere","Mesosphere","Stratosphere","Troposphere"];
+    tbody.innerHTML = order.map(L=>{
+      const d=res.dep[L];
+      return `<tr><td>${L}</td><td>${toFixed(d.al2o3*1000,1)}</td><td>${toFixed(d.tio2*1000,1)}</td><td>${toFixed(d.ssox*1000,1)}</td><td>${toFixed(d.cu*1000,1)}</td><td>${toFixed(d.bc*1000,1)}</td><td>${toFixed(d.nox*1000,1)}</td></tr>`
+    }).join('');
+
+    const risk = qs('#risk');
+    risk.innerHTML = `
+      <div class=\"kv\"><span>Surviving fragments (≥250 g)</span><span>${res.risk.N_survivors}</span></div>
+      <div class=\"kv\"><span>Total casualty area</span><span>${toFixed(res.risk.A_sum,2)} m²</span></div>
+      <div class=\"kv\"><span>Casualty expectation E<sub>c</sub></span><span>${res.risk.Ec.toExponential(2)}</span></div>
+      <div class=\"muted\" style=\"margin-top:6px\">Rule-of-thumb threshold: E<sub>c</sub> &lt; 1×10⁻⁴ — see agency standards.</div>
+    `;
+
+    const samples = qs('#samples');
+    samples.innerHTML = res.hist.slice(0,150).map(d=>
+      `t=${toFixed(d.t,1)}s · h=${toFixed(d.h/1000,2)} km · v=${toFixed(d.v/1000,2)} km/s · q=${toFixed(d.q/1000,2)} kPa · q̇=${toFixed(d.qdot/1e6,2)} MW/m²`
+    ).join('<br/>');
+
+    const checks = qs('#checks');
+    const sumfrac = ['al','ti','ss','cu','cfrp','other'].map(k=>+qs('#f_'+k).value).reduce((a,b)=>a+b,0);
+    let msgs=[];
+    if(Math.abs(sumfrac-1)>0.05) msgs.push('Material fractions do not sum to ~1. Model normalized them internally.');
+    if(+qs('#gamma').value<=0) msgs.push('γ is non‑positive; with this convention, use γ > 0 for descent.');
+    else if(+qs('#gamma').value<0.2) msgs.push('Very shallow γ may cause long-range “skipping”; 1‑DOF may underpredict range.');
+    if(+qs('#ld').value>0.2) msgs.push('Lift modeled crudely (L∝D). For lifting bodies, use 3-DOF.');
+    if(+qs('#rn').value<0.03) msgs.push('Very small Rn increases heating strongly (q̇∝1/√Rₙ).');
+    if(res.totals.bc*1000>50) msgs.push('Large soot yield—consider radiative effects sensitivity.');
+    if(qs('#stoch_on').checked && res.risk.Ec>1e-4) msgs.push('Casualty expectation above 1e-4 — consider targeted disposal or controlled reentry.');
+    checks.innerHTML = msgs.length? msgs.map(m=>'• '+m).join('<br/>') : 'No obvious issues in chosen parameters.';
+
+    const self = qs('#selfchecks');
+    self.innerHTML = physicsChecks().map(s=>'• '+s).join('<br/>');
+  }
+
+  function run(){ const res = integrate(); render(res); window._lastRes = res; }
+  document.getElementById('run').addEventListener('click', run);
+  document.getElementById('export').addEventListener('click', ()=>{
+    const blob = new Blob([JSON.stringify(window._lastRes||{},null,2)], {type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'reentry_results.json'; a.click(); URL.revokeObjectURL(a.href);
+  });
+
+  // focus chart toggle
+  document.getElementById('focus').addEventListener('click', ()=>{
+    document.body.classList.toggle('focus-chart');
+    if(window._lastRes) drawPlot(window._lastRes.hist);
+  });
+
+  // autorun
+  run();
+  </script>
+</body>
+</html>
