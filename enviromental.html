@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEO Re-entry & Environmental Impact Model</title>
+  <style>
+    :root{
+      --bg:#0b1220;--panel:#111a2b;--muted:#7f8bad;--accent:#7dd3fc;--accent2:#a78bfa;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
+      --text:#e6ecff;--grid:#1b2742;--chip:#0f172a;--card:#0e1628;--border:#1e2a43
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0a0a0a;color:var(--text)}
+    
+    header{padding:22px 20px;border-bottom:1px solid #2a2a2a;background:#000000;position:sticky;top:0;z-index:100}
+    
+    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto}
+    
+    .home-link{color:#ffffff;text-decoration:none;font-size:0.9rem;padding:0.6rem 1.2rem;border:1px solid #2a2a2a;transition:all 0.2s}
+    .home-link:hover{background:#ffffff;color:#000000;border-color:#ffffff}
+    
+    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px;font-weight:300}
+    .sub{color:var(--muted);font-size:14px}
+    
+    /* Mode Toggle */
+    .mode-toggle-container{text-align:center;padding:1rem;background:#000000;border-bottom:1px solid #2a2a2a}
+    .mode-toggle{display:inline-flex;gap:0.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;padding:4px}
+    .mode-btn-toggle{padding:0.7rem 2rem;background:transparent;border:none;color:#999999;cursor:pointer;transition:all 0.2s;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em}
+    .mode-btn-toggle.active{background:#ffffff;color:#000000}
+    
+    /* Preset Scenarios */
+    .presets-section{background:#000000;border-bottom:1px solid #2a2a2a;padding:1.5rem 2rem}
+    .presets-container{max-width:1500px;margin:0 auto}
+    .presets-title{color:#7dd3fc;font-size:1rem;margin-bottom:1rem;text-align:center}
+    .preset-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .preset-btn{padding:0.8rem 1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-size:0.85rem}
+    .preset-btn:hover{background:#1a1a1a;border-color:#7dd3fc}
+    
+    main{display:grid;grid-template-columns:360px 1fr;gap:18px;max-width:1500px;margin:12px auto 24px;padding:0 18px 28px}
+    main.simple-mode{grid-template-columns:1fr}
+    
+    .panel{background:#000000;border:1px solid #2a2a2a;border-radius:2px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
+    .left{padding:14px}
+    .left.hidden{display:none}
+    
+    .simple-controls{display:none;max-width:800px;margin:0 auto;padding:2rem}
+    .simple-mode .simple-controls{display:block}
+    
+    .simple-group{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:1.5rem;margin-bottom:1.5rem}
+    .simple-group h3{color:#7dd3fc;font-size:1.1rem;margin-bottom:1rem}
+    .simple-slider{margin:1.5rem 0}
+    .simple-slider label{display:block;color:#b0b0b0;margin-bottom:0.5rem;font-size:0.9rem}
+    .simple-slider input{width:100%;height:4px;background:#2a2a2a;outline:none}
+    .simple-value{color:#ffffff;font-size:1.1rem;margin-top:0.5rem}
+    
+    .group{padding:12px 12px 8px;border-radius:2px;background:#000000;margin-bottom:10px;border:1px solid #2a2a2a}
+    .group h3{margin:0 0 8px;font-size:14px;color:#cbd5ff;letter-spacing:.3px}
+    label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdd7ff;margin:8px 0}
+    input[type="number"], select{width:150px;background:#0a0a0a;border:1px solid #2a2a2a;color:var(--text);padding:6px 8px;border-radius:2px}
+    input[type="checkbox"]{transform:scale(1.1)}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2a2a;background:#000000;color:var(--text);padding:10px 12px;border-radius:2px;cursor:pointer;transition:all 0.2s}
+    .btn.secondary{background:#0a0a0a}
+    .btn:hover{background:#ffffff;color:#000000}
+    .btn:active{transform:translateY(1px)}
+    
+    .right{display:grid;grid-template-rows:auto auto;gap:14px}
+    canvas{display:block;width:100%;height:auto;background:#0a0a0a;border-radius:2px;border:1px solid #2a2a2a}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0}
+    .card{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:12px;min-height:140px}
+    .card h4{margin:0 0 10px;font-weight:600;color:#dbe2ff}
+    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #2a2a2a;padding:6px 0}
+    .kv:last-child{border-bottom:none}
+    
+    /* Comparison Section */
+    .comparison-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
+    .comparison-title{text-align:center;font-size:1.3rem;color:#7dd3fc;margin-bottom:1.5rem}
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .comparison-item{text-align:center;padding:1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px}
+    .comparison-value{font-size:2.5rem;font-weight:600;color:#ffffff;margin:1rem 0}
+    .comparison-label{color:#b0b0b0;font-size:0.9rem}
+    
+    /* Info Sections */
+    .info-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
+    .info-section h3{color:#7dd3fc;font-size:1.2rem;margin-bottom:1rem}
+    .info-section p{color:#b0b0b0;line-height:1.7;margin-bottom:1rem}
+    .info-section ul{color:#b0b0b0;line-height:1.8;margin-left:1.5rem}
+    .info-section li{margin-bottom:0.5rem}
+    
+    .tag{display:inline-flex;align-items:center;gap:6px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
+    .legend{display:flex;gap:8px;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:12px}
+    .notice{font-size:12px;color:#b3c6ff;margin-top:8px}
+    .table{width:100%;border-collapse:collapse;font-size:13px}
+    .table th,.table td{border-bottom:1px dashed #2a2a2a;padding:6px 8px;text-align:right}
+    .table th:first-child,.table td:first-child{text-align:left}
+    
+    @media (max-width:1080px){
+      main{grid-template-columns:1fr}
+      .right{grid-template-rows:auto}
+      .cards{grid-template-columns:1fr}
+      .comparison-grid{grid-template-columns:1fr}
+      .preset-buttons{flex-direction:column}
+    }
+    
+    .focus-chart main{grid-template-columns:1fr}
+    .focus-chart .left{display:none}
+    .focus-chart .cards{grid-template-columns:repeat(2,1fr)}
+    .help{font-size:12px;color:var(--muted);margin:4px 0 0}
+    details.helpbox{border:1px dashed #2a2a2a;padding:8px 10px;border-radius:2px;background:#0a0a0a}
+    details.helpbox summary{cursor:pointer;color:#cfe1ff}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="home-link">← Home</a>
+      <div>
+        <h1>LEO Re-entry & Environmental Impact Model</h1>
+        <div class="sub">Numerical 1-DOF ballistic re-entry with environmental impact analysis</div>
+      </div>
+      <div style="width:100px"></div>
+    </div>
+  </header>
+
+  <div class="mode-toggle-container">
+    <div class="mode-toggle">
+      <button class="mode-btn-toggle active" onclick="setMode('simple')">Simple Mode</button>
+      <button class="mode-btn-toggle" onclick="setMode('advanced')">Advanced Mode</button>
+    </div>
+  </div>
+
+  <div class="presets-section">
+    <div class="presets-container">
+      <div class="presets-title">Quick Preset Scenarios</div>
+      <div class="preset-buttons">
+        <button class="preset-btn" onclick="loadPreset('starlink')">📡 Starlink Satellite (260 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('iss')">🛰️ ISS Module (15,000 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('gps')">🌐 GPS Satellite (2,000 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('cubesat')">📦 CubeSat (5 kg)</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="mainGrid">
+    <!-- Simple Mode Controls -->
+    <div class="simple-controls">
+      <div class="simple-group">
+        <h3>Satellite Mass</h3>
+        <div class="simple-slider">
+          <label>How heavy is the satellite?</label>
+          <input type="range" id="simple_mass" min="5" max="15000" value="220" step="10">
+          <div class="simple-value"><span id="simple_mass_val">220</span> kg</div>
+        </div>
+      </div>
+
+      <div class="simple-group">
+        <h3>Entry Speed</h3>
+        <div class="simple-slider">
+          <label>How fast is it falling?</label>
+          <input type="range" id="simple_speed" min="7000" max="8000" value="7800" step="10">
+          <div class="simple-value"><span id="simple_speed_val">7800</span> m/s</div>
+        </div>
+      </div>
+
+      <div class="simple-group">
+        <h3>Material Composition</h3>
+        <select id="simple_material" style="width:100%;padding:0.8rem;font-size:1rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff">
+          <option value="aluminum">Mostly Aluminum (typical satellite)</option>
+          <option value="mixed">Mixed Materials (space station module)</option>
+          <option value="dense">Dense Metals (GPS satellite)</option>
+        </select>
+      </div>
+
+      <button class="btn" style="width:100%;padding:1.2rem;font-size:1rem;margin-top:1rem" onclick="runFromSimple()">▶ Run Simulation</button>
+    </div>
+
+    <!-- Advanced Mode Controls -->
+    <section class="left panel" aria-label="Inputs">
+      <div class="group">
+        <h3>Vehicle & Trajectory</h3>
+        <label><span>Initial mass m<sub>0</sub> (kg)</span><input id="m0" type="number" step="1" value="220"/></label>
+        <label><span>Reference area A (m²)</span><input id="area" type="number" step="0.01" value="0.6"/></label>
+        <label><span>Drag coefficient C<sub>D</sub></span><input id="cd" type="number" step="0.01" value="2.1"/></label>
+        <label><span>Nose radius R<sub>n</sub> (m) for heating</span><input id="rn" type="number" step="0.01" value="0.20"/></label>
+        <label><span>Initial speed v<sub>0</sub> (m/s)</span><input id="v0" type="number" step="1" value="7800"/></label>
+        <label><span>Entry altitude h<sub>0</sub> (km)</span><input id="h0" type="number" step="1" value="120"/></label>
+        <label><span>Flight-path angle γ (deg, down positive)</span><input id="gamma" type="number" step="0.1" value="1.2"/></label>
+        <label><span>Time step Δt (s)</span><input id="dt" type="number" step="0.1" value="0.2"/></label>
+        <label><span>Max sim time (s)</span><input id="tmax" type="number" step="1" value="8000"/></label>
+        <label><span>Breakup dynamic pressure q* (Pa)</span><input id="qcrit" type="number" step="1" value="1500"/></label>
+        <label><span>Allow lift (L/D)</span><input id="ld" type="number" step="0.01" value="0.00"/></label>
+        <details class="helpbox"><summary>What these inputs mean</summary>
+          <ul class="help">
+            <li><b>m₀</b>: total mass at interface (~120 km).</li>
+            <li><b>A</b>: reference cross-section; sets drag and heating collection area.</li>
+            <li><b>C<sub>D</sub></b>: drag coefficient; 2.0–2.2 typical for blunt tumbling shapes.</li>
+            <li><b>R<sub>n</sub></b>: effective nose radius for stagnation heating; smaller ⇒ hotter.</li>
+            <li><b>v₀</b>: interface speed; ~7.6–7.9 km/s for LEO.</li>
+          </ul>
+        </details>
+      </div>
+
+      <div class="group">
+        <h3>Materials & Mass Fractions</h3>
+        <label><span>Aluminum fraction</span><input id="f_al" type="number" step="0.01" value="0.55"/></label>
+        <label><span>Titanium fraction</span><input id="f_ti" type="number" step="0.01" value="0.10"/></label>
+        <label><span>Stainless steel fraction</span><input id="f_ss" type="number" step="0.01" value="0.05"/></label>
+        <label><span>Electronics+Cu fraction</span><input id="f_cu" type="number" step="0.01" value="0.08"/></label>
+        <label><span>CFRP/epoxy fraction</span><input id="f_cfrp" type="number" step="0.01" value="0.17"/></label>
+        <label><span>Other/inert fraction</span><input id="f_other" type="number" step="0.01" value="0.05"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Thermochemistry</h3>
+        <label><span>H<sub>abl</sub>(Al) (MJ/kg)</span><input id="H_al" type="number" step="0.1" value="13.0"/></label>
+        <label><span>H<sub>abl</sub>(Ti) (MJ/kg)</span><input id="H_ti" type="number" step="0.1" value="14.0"/></label>
+        <label><span>H<sub>abl</sub>(SS) (MJ/kg)</span><input id="H_ss" type="number" step="0.1" value="16.0"/></label>
+        <label><span>H<sub>abl</sub>(Cu/elec) (MJ/kg)</span><input id="H_cu" type="number" step="0.1" value="12.0"/></label>
+        <label><span>H<sub>abl</sub>(CFRP) (MJ/kg)</span><input id="H_cfrp" type="number" step="0.1" value="25.0"/></label>
+        <label><span>Heat split to ablation</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Stochastic Breakup & Risk</h3>
+        <label><span>Enable stochastic breakup</span><input id="stoch_on" type="checkbox" checked></label>
+        <label><span>Mean # fragments (≥250 g)</span><input id="N_frag" type="number" step="1" value="25"/></label>
+        <label><span>Lognormal σ (mass spread)</span><input id="sigma_ln" type="number" step="0.1" value="1.0"/></label>
+        <label><span>Shape/area factor k<sub>A</sub></span><input id="kA" type="number" step="0.01" value="0.025"/></label>
+        <label><span>Casualty area per survivor (m²)</span><input id="A_cas" type="number" step="0.01" value="0.35"/></label>
+        <label><span>Land-track fraction</span><input id="f_land" type="number" step="0.01" value="0.29"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Environmental Yields & Chemistry</h3>
+        <label><span>Al → Al₂O₃ yield</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
+        <label><span>Ti → TiO₂ yield</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
+        <label><span>SS metals → oxides</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
+        <label><span>Electronics → CuO/Cu</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
+        <label><span>CFRP → black carbon</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
+        <label><span>SSA Al₂O₃ (m²/g)</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
+        <label><span>SSA TiO₂ (m²/g)</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
+        <label><span>NOₓ yield k<sub>NOx</sub> (kg/MJ)</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
+        <label><span>NOₓ altitude peak (km)</span><input id="hNOx" type="number" step="1" value="35"/></label>
+        <label><span>O₃ loss proxy κ</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
+        <label><span>Proxy window (days)</span><input id="tO3days" type="number" step="1" value="30"/></label>
+      </div>
+
+      <div class="group row">
+        <button id="run" class="btn">▶ Run</button>
+        <button id="export" class="btn secondary">⇩ Export</button>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="card" id="chartCard">
+        <div class="toolbar" style="display:flex;gap:8px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap">
+          <div class="legend">
+            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude</label>
+            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed</label>
+            <label class="tag"><input id="show_q" type="checkbox" checked> Pressure</label>
+            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating</label>
+          </div>
+          <button id="focus" class="btn">📈 Focus</button>
+        </div>
+        <canvas id="plot" height="460"></canvas>
+      </div>
+      
+      <!-- Comparison Section -->
+      <div class="comparison-section">
+        <div class="comparison-title">Environmental Impact Comparison</div>
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <div class="comparison-label">This Satellite Reentry</div>
+            <div class="comparison-value" id="sat_al2o3">~24 kg</div>
+            <div class="comparison-label">Aluminum Oxide (Al₂O₃)</div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">Equivalent To</div>
+            <div class="comparison-value" id="car_equiv">~5 cars</div>
+            <div class="comparison-label">Driving for one year</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h4>Key Events</h4>
+          <div id="events"></div>
+        </div>
+        <div class="card">
+          <h4>Totals</h4>
+          <div id="totals"></div>
+        </div>
+        <div class="card">
+          <h4>Layer Depositions</h4>
+          <table class="table" id="layers">
+            <thead><tr><th>Layer</th><th>Al₂O₃</th><th>TiO₂</th><th>NOₓ</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Mitigation Strategies -->
+      <div class="info-section">
+        <h3>🛡️ Mitigation Strategies</h3>
+        <p>Technologies and approaches to reduce reentry pollution:</p>
+        <ul>
+          <li><strong>Controlled Deorbiting:</strong> Guiding satellites to burn up over oceans minimizes land impact risks and concentrates debris in unpopulated areas.</li>
+          <li><strong>Alternative Materials:</strong> Using materials that produce less harmful emissions during burnup, such as composites that generate fewer aluminum oxides.</li>
+          <li><strong>Extended Orbital Life:</strong> Designing satellites for longer operational periods reduces the frequency of reentries.</li>
+          <li><strong>Active Debris Removal:</strong> Developing technologies to capture and safely deorbit defunct satellites before uncontrolled reentry.</li>
+          <li><strong>Complete Burnup Design:</strong> Engineering satellites to fully disintegrate in the atmosphere, leaving no debris to reach the ground.</li>
+        </ul>
+      </div>
+
+      <!-- Policy Implications -->
+      <div class="info-section">
+        <h3>📜 Policy & Regulation</h3>
+        <p>Current and proposed regulations to address space debris:</p>
+        <ul>
+          <li><strong>25-Year Rule:</strong> Satellites must deorbit within 25 years of mission end (FCC/ITU guidelines).</li>
+          <li><strong>ESA Zero Debris Charter:</strong> Commitment to eliminate debris creation by 2030.</li>
+          <li><strong>UN Space Debris Guidelines:</strong> Voluntary guidelines for sustainable space operations.</li>
+          <li><strong>Proposed Regulations:</strong> Mandatory environmental impact assessments for mega-constellations, reentry reporting requirements, and fees for orbital pollution.</li>
+          <li><strong>International Cooperation:</strong> Need for global standards on satellite design, disposal methods, and debris tracking.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="grid-column:1/-1">
+        <h4>Risk & Chemistry Proxies</h4>
+        <div id="risk"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  const μ = 3.986004418e14, Re = 6371e3, kSG = 1.74153e-4, POP = 8.0e9, LAND = 1.49e14, PPERM2 = POP/LAND;
+  const toFixed = (x,n=2)=>Number.isFinite(x)?x.toFixed(n):"-";
+
+  let currentMode = 'simple';
+
+  function setMode(mode) {
+    currentMode = mode;
+    const mainGrid = document.getElementById('mainGrid');
+    const btns = document.querySelectorAll('.mode-btn-toggle');
+    const leftPanel = document.querySelector('.left');
+    
+    btns.forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    if (mode === 'simple') {
+      mainGrid.classList.add('simple-mode');
+      leftPanel.classList.add('hidden');
+    } else {
+      mainGrid.classList.remove('simple-mode');
+      leftPanel.classList.remove('hidden');
+    }
+  }
+
+  // Preset scenarios
+  const presets = {
+    starlink: {m0:260, area:2.8, cd:2.2, rn:0.15, v0:7750, gamma:0.8, f_al:0.60, f_ti:0.08, f_ss:0.05, f_cu:0.12, f_cfrp:0.12, f_other:0.03},
+    iss: {m0:15000, area:15, cd:2.0, rn:2.0, v0:7660, gamma:1.5, f_al:0.45, f_ti:0.15, f_ss:0.15, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
+    gps: {m0:2000, area:8, cd:2.1, rn:0.8, v0:3900, gamma:2.0, f_al:0.40, f_ti:0.20, f_ss:0.10, f_cu:0.15, f_cfrp:0.10, f_other:0.05},
+    cubesat: {m0:5, area:0.1, cd:2.2, rn:0.05, v0:7800, gamma:0.5, f_al:0.70, f_ti:0.05, f_ss:0.02, f_cu:0.15, f_cfrp:0.05, f_other:0.03}
+  };
+
+  function loadPreset(type) {
+    const p = presets[type];
+    Object.keys(p).forEach(k => {
+      const el = document.getElementById(k);
+      if (el) el.value = p[k];
+    });
+    run();
+  }
+
+  // Simple mode handlers
+  document.getElementById('simple_mass')?.addEventListener('input', e => {
+    document.getElementById('simple_mass_val').textContent = e.target.value;
+    document.getElementById('m0').value = e.target.value;
+  });
+  document.getElementById('simple_speed')?.addEventListener('input', e => {
+    document.getElementById('simple_speed_val').textContent = e.target.value;
+    document.getElementById('v0').value = e.target.value;
+  });
+  document.getElementById('simple_material')?.addEventListener('change', e => {
+    const matProfiles = {
+      aluminum: {f_al:0.70, f_ti:0.05, f_ss:0.05, f_cu:0.10, f_cfrp:0.08, f_other:0.02},
+      mixed: {f_al:0.50, f_ti:0.15, f_ss:0.10, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
+      dense: {f_al:0.35, f_ti:0.20, f_ss:0.15, f_cu:0.15, f_cfrp:0.10<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEO Re-entry & Environmental Impact Model</title>
+  <style>
+    :root{
+      --bg:#0b1220;--panel:#111a2b;--muted:#7f8bad;--accent:#7dd3fc;--accent2:#a78bfa;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
+      --text:#e6ecff;--grid:#1b2742;--chip:#0f172a;--card:#0e1628;--border:#1e2a43
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0a0a0a;color:var(--text)}
+    
+    header{padding:22px 20px;border-bottom:1px solid #2a2a2a;background:#000000;position:sticky;top:0;z-index:100}
+    
+    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto}
+    
+    .home-link{color:#ffffff;text-decoration:none;font-size:0.9rem;padding:0.6rem 1.2rem;border:1px solid #2a2a2a;transition:all 0.2s}
+    .home-link:hover{background:#ffffff;color:#000000;border-color:#ffffff}
+    
+    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px;font-weight:300}
+    .sub{color:var(--muted);font-size:14px}
+    
+    .mode-toggle-container{text-align:center;padding:1rem;background:#000000;border-bottom:1px solid #2a2a2a}
+    .mode-toggle{display:inline-flex;gap:0.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;padding:4px}
+    .mode-btn-toggle{padding:0.7rem 2rem;background:transparent;border:none;color:#999999;cursor:pointer;transition:all 0.2s;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em}
+    .mode-btn-toggle.active{background:#ffffff;color:#000000}
+    
+    .presets-section{background:#000000;border-bottom:1px solid #2a2a2a;padding:1.5rem 2rem}
+    .presets-container{max-width:1500px;margin:0 auto}
+    .presets-title{color:#7dd3fc;font-size:1rem;margin-bottom:1rem;text-align:center}
+    .preset-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .preset-btn{padding:0.8rem 1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-size:0.85rem}
+    .preset-btn:hover{background:#1a1a1a;border-color:#7dd3fc}
+    
+    main{display:grid;grid-template-columns:360px 1fr;gap:18px;max-width:1500px;margin:12px auto 24px;padding:0 18px 28px}
+    main.simple-mode{grid-template-columns:1fr}
+    
+    .panel{background:#000000;border:1px solid #2a2a2a;border-radius:2px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
+    .left{padding:14px}
+    .left.hidden{display:none}
+    
+    .simple-controls{display:none;max-width:800px;margin:0 auto;padding:2rem}
+    .simple-mode .simple-controls{display:block}
+    
+    .simple-group{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:1.5rem;margin-bottom:1.5rem}
+    .simple-group h3{color:#7dd3fc;font-size:1.1rem;margin-bottom:1rem}
+    .simple-slider{margin:1.5rem 0}
+    .simple-slider label{display:block;color:#b0b0b0;margin-bottom:0.5rem;font-size:0.9rem}
+    .simple-slider input[type="range"]{width:100%;height:4px;background:#2a2a2a;outline:none}
+    .simple-value{color:#ffffff;font-size:1.1rem;margin-top:0.5rem}
+    
+    .group{padding:12px 12px 8px;border-radius:2px;background:#000000;margin-bottom:10px;border:1px solid #2a2a2a}
+    .group h3{margin:0 0 8px;font-size:14px;color:#cbd5ff;letter-spacing:.3px}
+    label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdd7ff;margin:8px 0}
+    input[type="number"], select{width:150px;background:#0a0a0a;border:1px solid #2a2a2a;color:var(--text);padding:6px 8px;border-radius:2px}
+    input[type="checkbox"]{transform:scale(1.1)}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2a2a;background:#000000;color:var(--text);padding:10px 12px;border-radius:2px;cursor:pointer;transition:all 0.2s}
+    .btn.secondary{background:#0a0a0a}
+    .btn:hover{background:#ffffff;color:#000000}
+    .btn:active{transform:translateY(1px)}
+    
+    .right{display:grid;grid-template-rows:auto auto;gap:14px}
+    canvas{display:block;width:100%;height:auto;background:#0a0a0a;border-radius:2px;border:1px solid #2a2a2a}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0}
+    .card{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:12px;min-height:140px}
+    .card h4{margin:0 0 10px;font-weight:600;color:#dbe2ff}
+    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #2a2a2a;padding:6px 0}
+    .kv:last-child{border-bottom:none}
+    
+    .comparison-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
+    .comparison-title{text-align:center;font-size:1.3rem;color:#7dd3fc;margin-bottom:1.5rem}
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .comparison-item{text-align:center;padding:1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px}
+    .comparison-value{font-size:2.5rem;font-weight:600;color:#ffffff;margin:1rem 0}
+    .comparison-label{color:#b0b0b0;font-size:0.9rem}
+    
+    .info-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
+    .info-section h3{color:#7dd3fc;font-size:1.2rem;margin-bottom:1rem}
+    .info-section p{color:#b0b0b0;line-height:1.7;margin-bottom:1rem}
+    .info-section ul{color:#b0b0b0;line-height:1.8;margin-left:1.5rem}
+    .info-section li{margin-bottom:0.5rem}
+    
+    .tag{display:inline-flex;align-items:center;gap:6px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
+    .legend{display:flex;gap:8px;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:12px}
+    .notice{font-size:12px;color:#b3c6ff;margin-top:8px}
+    .table{width:100%;border-collapse:collapse;font-size:13px}
+    .table th,.table td{border-bottom:1px dashed #2a2a2a;padding:6px 8px;text-align:right}
+    .table th:first-child,.table td:first-child{text-align:left}
+    
+    @media (max-width:1080px){
+      main{grid-template-columns:1fr}
+      .right{grid-template-rows:auto}
+      .cards{grid-template-columns:1fr}
+      .comparison-grid{grid-template-columns:1fr}
+      .preset-buttons{flex-direction:column}
+    }
+    
+    .focus-chart main{grid-template-columns:1fr}
+    .focus-chart .left{display:none}
+    .focus-chart .cards{grid-template-columns:repeat(2,1fr)}
+    .help{font-size:12px;color:var(--muted);margin:4px 0 0}
+    details.helpbox{border:1px dashed #2a2a2a;padding:8px 10px;border-radius:2px;background:#0a0a0a}
+    details.helpbox summary{cursor:pointer;color:#cfe1ff}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="home-link">← Home</a>
+      <div>
+        <h1>LEO Re-entry & Environmental Impact Model</h1>
+        <div class="sub">Numerical 1-DOF ballistic re-entry with environmental impact analysis</div>
+      </div>
+      <div style="width:100px"></div>
+    </div>
+  </header>
+
+  <div class="mode-toggle-container">
+    <div class="mode-toggle">
+      <button class="mode-btn-toggle active" onclick="setMode('simple')">Simple Mode</button>
+      <button class="mode-btn-toggle" onclick="setMode('advanced')">Advanced Mode</button>
+    </div>
+  </div>
+
+  <div class="presets-section">
+    <div class="presets-container">
+      <div class="presets-title">Quick Preset Scenarios</div>
+      <div class="preset-buttons">
+        <button class="preset-btn" onclick="loadPreset('starlink')">📡 Starlink Satellite (260 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('iss')">🛰️ ISS Module (15,000 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('gps')">🌐 GPS Satellite (2,000 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('cubesat')">📦 CubeSat (5 kg)</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="mainGrid">
+    <div class="simple-controls">
+      <div class="simple-group">
+        <h3>Satellite Mass</h3>
+        <div class="simple-slider">
+          <label>How heavy is the satellite?</label>
+          <input type="range" id="simple_mass" min="5" max="15000" value="220" step="10">
+          <div class="simple-value"><span id="simple_mass_val">220</span> kg</div>
+        </div>
+      </div>
+
+      <div class="simple-group">
+        <h3>Entry Speed</h3>
+        <div class="simple-slider">
+          <label>How fast is it falling?</label>
+          <input type="range" id="simple_speed" min="7000" max="8000" value="7800" step="10">
+          <div class="simple-value"><span id="simple_speed_val">7800</span> m/s</div>
+        </div>
+      </div>
+
+      <div class="simple-group">
+        <h3>Material Composition</h3>
+        <select id="simple_material" style="width:100%;padding:0.8rem;font-size:1rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff">
+          <option value="aluminum">Mostly Aluminum (typical satellite)</option>
+          <option value="mixed">Mixed Materials (space station module)</option>
+          <option value="dense">Dense Metals (GPS satellite)</option>
+        </select>
+      </div>
+
+      <button class="btn" style="width:100%;padding:1.2rem;font-size:1rem;margin-top:1rem" onclick="runFromSimple()">▶ Run Simulation</button>
+    </div>
+
+    <section class="left panel" aria-label="Inputs">
+      <div class="group">
+        <h3>Vehicle & Trajectory</h3>
+        <label><span>Initial mass m<sub>0</sub> (kg)</span><input id="m0" type="number" step="1" value="220"/></label>
+        <label><span>Reference area A (m²)</span><input id="area" type="number" step="0.01" value="0.6"/></label>
+        <label><span>Drag coefficient C<sub>D</sub></span><input id="cd" type="number" step="0.01" value="2.1"/></label>
+        <label><span>Nose radius R<sub>n</sub> (m)</span><input id="rn" type="number" step="0.01" value="0.20"/></label>
+        <label><span>Initial speed v<sub>0</sub> (m/s)</span><input id="v0" type="number" step="1" value="7800"/></label>
+        <label><span>Entry altitude h<sub>0</sub> (km)</span><input id="h0" type="number" step="1" value="120"/></label>
+        <label><span>Flight-path angle γ (deg)</span><input id="gamma" type="number" step="0.1" value="1.2"/></label>
+        <label><span>Time step Δt (s)</span><input id="dt" type="number" step="0.1" value="0.2"/></label>
+        <label><span>Max sim time (s)</span><input id="tmax" type="number" step="1" value="8000"/></label>
+        <label><span>Breakup pressure q* (Pa)</span><input id="qcrit" type="number" step="1" value="1500"/></label>
+        <label><span>Lift (L/D)</span><input id="ld" type="number" step="0.01" value="0.00"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Materials & Mass Fractions</h3>
+        <label><span>Aluminum</span><input id="f_al" type="number" step="0.01" value="0.55"/></label>
+        <label><span>Titanium</span><input id="f_ti" type="number" step="0.01" value="0.10"/></label>
+        <label><span>Stainless steel</span><input id="f_ss" type="number" step="0.01" value="0.05"/></label>
+        <label><span>Electronics+Cu</span><input id="f_cu" type="number" step="0.01" value="0.08"/></label>
+        <label><span>CFRP/epoxy</span><input id="f_cfrp" type="number" step="0.01" value="0.17"/></label>
+        <label><span>Other/inert</span><input id="f_other" type="number" step="0.01" value="0.05"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Thermochemistry</h3>
+        <label><span>H<sub>abl</sub>(Al) MJ/kg</span><input id="H_al" type="number" step="0.1" value="13.0"/></label>
+        <label><span>H<sub>abl</sub>(Ti) MJ/kg</span><input id="H_ti" type="number" step="0.1" value="14.0"/></label>
+        <label><span>H<sub>abl</sub>(SS) MJ/kg</span><input id="H_ss" type="number" step="0.1" value="16.0"/></label>
+        <label><span>H<sub>abl</sub>(Cu) MJ/kg</span><input id="H_cu" type="number" step="0.1" value="12.0"/></label>
+        <label><span>H<sub>abl</sub>(CFRP) MJ/kg</span><input id="H_cfrp" type="number" step="0.1" value="25.0"/></label>
+        <label><span>Heat efficiency</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Stochastic Breakup</h3>
+        <label><span>Enable breakup</span><input id="stoch_on" type="checkbox" checked></label>
+        <label><span>Mean fragments</span><input id="N_frag" type="number" step="1" value="25"/></label>
+        <label><span>Mass spread σ</span><input id="sigma_ln" type="number" step="0.1" value="1.0"/></label>
+        <label><span>Area factor k<sub>A</sub></span><input id="kA" type="number" step="0.01" value="0.025"/></label>
+        <label><span>Casualty area (m²)</span><input id="A_cas" type="number" step="0.01" value="0.35"/></label>
+        <label><span>Land fraction</span><input id="f_land" type="number" step="0.01" value="0.29"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Environmental Yields</h3>
+        <label><span>Al → Al₂O₃</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
+        <label><span>Ti → TiO₂</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
+        <label><span>SS → oxides</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
+        <label><span>Cu → CuO</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
+        <label><span>CFRP → BC</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
+        <label><span>SSA Al₂O₃ m²/g</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
+        <label><span>SSA TiO₂ m²/g</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
+        <label><span>NOₓ yield kg/MJ</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
+        <label><span>NOₓ peak alt km</span><input id="hNOx" type="number" step="1" value="35"/></label>
+        <label><span>O₃ loss κ</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
+        <label><span>Window days</span><input id="tO3days" type="number" step="1" value="30"/></label>
+      </div>
+
+      <div class="group row">
+        <button id="run" class="btn">▶ Run</button>
+        <button id="export" class="btn secondary">⇩ Export</button>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="card" id="chartCard">
+        <div class="toolbar" style="display:flex;gap:8px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap">
+          <div class="legend">
+            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude</label>
+            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed</label>
+            <label class="tag"><input id="show_q" type="checkbox" checked> Pressure</label>
+            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating</label>
+          </div>
+          <button id="focus" class="btn">📈 Focus</button>
+        </div>
+        <canvas id="plot" height="460"></canvas>
+      </div>
+      
+      <div class="comparison-section">
+        <div class="comparison-title">Environmental Impact Comparison</div>
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <div class="comparison-label">This Satellite Reentry</div>
+            <div class="comparison-value" id="sat_al2o3">~24 kg</div>
+            <div class="comparison-label">Aluminum Oxide (Al₂O₃)</div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">Equivalent To</div>
+            <div class="comparison-value" id="car_equiv">~5 cars</div>
+            <div class="comparison-label">Driving for one year</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h4>Key Events</h4>
+          <div id="events"></div>
+        </div>
+        <div class="card">
+          <h4>Totals</h4>
+          <div id="totals"></div>
+        </div>
+        <div class="card">
+          <h4>Layer Depositions</h4>
+          <table class="table" id="layers">
+            <thead><tr><th>Layer</th><th>Al₂O₃</th><th>TiO₂</th><th>NOₓ</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>🛡️ Mitigation Strategies</h3>
+        <p>Technologies and approaches to reduce reentry pollution:</p>
+        <ul>
+          <li><strong>Controlled Deorbiting:</strong> Guiding satellites to burn up over oceans minimizes land impact risks.</li>
+          <li><strong>Alternative Materials:</strong> Using materials that produce less harmful emissions during burnup.</li>
+          <li><strong>Extended Orbital Life:</strong> Longer operational periods reduce reentry frequency.</li>
+          <li><strong>Active Debris Removal:</strong> Capturing and safely deorbiting defunct satellites.</li>
+          <li><strong>Complete Burnup Design:</strong> Engineering satellites to fully disintegrate in atmosphere.</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>📜 Policy & Regulation</h3>
+        <p>Current and proposed regulations addressing space debris:</p>
+        <ul>
+          <li><strong>25-Year Rule:</strong> Satellites must deorbit within 25 years of mission end.</li>
+          <li><strong>ESA Zero Debris Charter:</strong> Commitment to eliminate debris creation by 2030.</li>
+          <li><strong>UN Space Debris Guidelines:</strong> Voluntary guidelines for sustainable operations.</li>
+          <li><strong>Proposed Regulations:</strong> Environmental impact assessments for mega-constellations.</li>
+          <li><strong>International Cooperation:</strong> Need for global standards on design and disposal.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="grid-column:1/-1">
+        <h4>Risk Proxies</h4>
+        <div id="risk"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  const μ = 3.986004418e14, Re = 6371e3, kSG = 1.74153e-4, POP = 8.0e9, LAND = 1.49e14, PPERM2 = POP/LAND;
+  const toFixed = (x,n=2)=>Number.isFinite(x)?x.toFixed(n):"-";
+
+  let currentMode = 'simple';
+
+  function setMode(mode) {
+    currentMode = mode;
+    const mainGrid = document.getElementById('mainGrid');
+    const btns = document.querySelectorAll('.mode-btn-toggle');
+    const leftPanel = document.querySelector('.left');
+    
+    btns.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.mode-btn-toggle').forEach((b,i) => {
+      if((mode==='simple' && i===0) || (mode==='advanced' && i===1)) b.classList.add('active');
+    });
+    
+    if (mode === 'simple') {
+      mainGrid.classList.add('simple-mode');
+      leftPanel.classList.add('hidden');
+    } else {
+      mainGrid.classList.remove('simple-mode');
+      leftPanel.classList.remove('hidden');
+    }
+  }
+
+  const presets = {
+    starlink: {m0:260, area:2.8, cd:2.2, rn:0.15, v0:7750, gamma:0.8, f_al:0.60, f_ti:0.08, f_ss:0.05, f_cu:0.12, f_cfrp:0.12, f_other:0.03},
+    iss: {m0:15000, area:15, cd:2.0, rn:2.0, v0:7660, gamma:1.5, f_al:0.45, f_ti:0.15, f_ss:0.15, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
+    gps: {m0:2000, area:8, cd:2.1, rn:0.8, v0:3900, gamma:2.0, f_al:0.40, f_ti:0.20, f_ss:0.10, f_cu:0.15, f_cfrp:0.10, f_other:0.05},
+    cubesat: {m0:5, area:0.1, cd:2.2, rn:0.05, v0:7800, gamma:0.5, f_al:0.70, f_ti:0.05, f_ss:0.02, f_cu:0.15, f_cfrp:0.05, f_other:0.03}
+  };
+
+  function loadPreset(type) {
+    const p = presets[type];
+    Object.keys(p).forEach(k => {
+      const el = document.getElementById(k);
+      if (el) el.value = p[k];
+    });
+    run();
+  }
+
+  document.getElementById('simple_mass')?.addEventListener('input', e => {
+    document.getElementById('simple_mass_val').textContent = e.target.value;
+    document.getElementById('m0').value = e.target.value;
+  });
+  document.getElementById('simple_speed')?.addEventListener('input', e => {
+    document.getElementById('simple_speed_val').textContent = e.target.value;
+    document.getElementById('v0').value = e.target.value;
+  });
+  document.getElementById('simple_material')?.addEventListener('change', e => {
+    const matProfiles = {
+      aluminum: {f_al:0.70, f_ti:0.05, f_ss:0.05, f_cu:0.10, f_cfrp:0.08, f_other:0.02},
+      mixed: {f_al:0.50, f_ti:0.15, f_ss:0.10, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
+      dense: {f_al:0.35, f_ti:0.20, f_ss:0.15, f_cu:0.15, f_cfrp:0.10, f_other:0.05}
+    };
+    const prof = matProfiles[e.target.value];
+    Object.keys(prof).forEach(k => {
+      const el = document.getElementById(k);
+      if(el) el.value = prof[k];
+    });
+  });
+
+  function runFromSimple() {
+    run();
+  }
+
+  function stdAtmDensity(h){
+    const layers=[
+      {h:0,rho0:1.225,H:7400},{h:11000,rho0:0.3639,H:6000},{h:20000,rho0:0.0880,H:6400},
+      {h:32000,rho0:0.01322,H:7000},{h:47000,rho0:0.00143,H:7200},{h:51000,r<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEO Re-entry & Environmental Impact Model</title>
+  <style>
+    :root{
+      --bg:#0b1220;--panel:#111a2b;--muted:#7f8bad;--accent:#7dd3fc;--accent2:#a78bfa;--good:#22c55e;--warn:#f59e0b;--bad:#ef4444;
+      --text:#e6ecff;--grid:#1b2742;--chip:#0f172a;--card:#0e1628;--border:#1e2a43
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#0a0a0a;color:var(--text)}
+    
+    header{padding:22px 20px;border-bottom:1px solid #2a2a2a;background:#000000;position:sticky;top:0;z-index:100}
+    
+    .header-content{display:flex;justify-content:space-between;align-items:center;max-width:1500px;margin:0 auto}
+    
+    .home-link{color:#ffffff;text-decoration:none;font-size:0.9rem;padding:0.6rem 1.2rem;border:1px solid #2a2a2a;transition:all 0.2s}
+    .home-link:hover{background:#ffffff;color:#000000;border-color:#ffffff}
+    
+    h1{font-size:clamp(18px,3vw,26px);margin:0 0 6px 0;letter-spacing:0.2px;font-weight:300}
+    .sub{color:var(--muted);font-size:14px}
+    
+    .mode-toggle-container{text-align:center;padding:1rem;background:#000000;border-bottom:1px solid #2a2a2a}
+    .mode-toggle{display:inline-flex;gap:0.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:4px;padding:4px}
+    .mode-btn-toggle{padding:0.7rem 2rem;background:transparent;border:none;color:#999999;cursor:pointer;transition:all 0.2s;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.05em}
+    .mode-btn-toggle.active{background:#ffffff;color:#000000}
+    
+    .presets-section{background:#000000;border-bottom:1px solid #2a2a2a;padding:1.5rem 2rem}
+    .presets-container{max-width:1500px;margin:0 auto}
+    .presets-title{color:#7dd3fc;font-size:1rem;margin-bottom:1rem;text-align:center}
+    .preset-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+    .preset-btn{padding:0.8rem 1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#e5e5e5;cursor:pointer;transition:all 0.2s;font-size:0.85rem}
+    .preset-btn:hover{background:#1a1a1a;border-color:#7dd3fc}
+    
+    main{display:grid;grid-template-columns:360px 1fr;gap:18px;max-width:1500px;margin:12px auto 24px;padding:0 18px 28px}
+    main.simple-mode{grid-template-columns:1fr}
+    
+    .panel{background:#000000;border:1px solid #2a2a2a;border-radius:2px;box-shadow:0 6px 40px rgba(0,0,0,.35)}
+    .left{padding:14px}
+    .left.hidden{display:none}
+    
+    .simple-controls{display:none;max-width:800px;margin:0 auto;padding:2rem}
+    .simple-mode .simple-controls{display:block}
+    
+    .simple-group{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:1.5rem;margin-bottom:1.5rem}
+    .simple-group h3{color:#7dd3fc;font-size:1.1rem;margin-bottom:1rem}
+    .simple-slider{margin:1.5rem 0}
+    .simple-slider label{display:block;color:#b0b0b0;margin-bottom:0.5rem;font-size:0.9rem}
+    .simple-slider input[type="range"]{width:100%;height:4px;background:#2a2a2a;outline:none}
+    .simple-value{color:#ffffff;font-size:1.1rem;margin-top:0.5rem}
+    
+    .group{padding:12px 12px 8px;border-radius:2px;background:#000000;margin-bottom:10px;border:1px solid #2a2a2a}
+    .group h3{margin:0 0 8px;font-size:14px;color:#cbd5ff;letter-spacing:.3px}
+    label{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cdd7ff;margin:8px 0}
+    input[type="number"], select{width:150px;background:#0a0a0a;border:1px solid #2a2a2a;color:var(--text);padding:6px 8px;border-radius:2px}
+    input[type="checkbox"]{transform:scale(1.1)}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a2a2a;background:#000000;color:var(--text);padding:10px 12px;border-radius:2px;cursor:pointer;transition:all 0.2s}
+    .btn.secondary{background:#0a0a0a}
+    .btn:hover{background:#ffffff;color:#000000}
+    .btn:active{transform:translateY(1px)}
+    
+    .right{display:grid;grid-template-rows:auto auto;gap:14px}
+    canvas{display:block;width:100%;height:auto;background:#0a0a0a;border-radius:2px;border:1px solid #2a2a2a}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:0}
+    .card{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:12px;min-height:140px}
+    .card h4{margin:0 0 10px;font-weight:600;color:#dbe2ff}
+    .kv{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed #2a2a2a;padding:6px 0}
+    .kv:last-child{border-bottom:none}
+    
+    .comparison-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
+    .comparison-title{text-align:center;font-size:1.3rem;color:#7dd3fc;margin-bottom:1.5rem}
+    .comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    .comparison-item{text-align:center;padding:1.5rem;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px}
+    .comparison-value{font-size:2.5rem;font-weight:600;color:#ffffff;margin:1rem 0}
+    .comparison-label{color:#b0b0b0;font-size:0.9rem}
+    
+    .info-section{background:#000000;border:1px solid #2a2a2a;border-radius:2px;padding:2rem;margin:2rem 0}
+    .info-section h3{color:#7dd3fc;font-size:1.2rem;margin-bottom:1rem}
+    .info-section p{color:#b0b0b0;line-height:1.7;margin-bottom:1rem}
+    .info-section ul{color:#b0b0b0;line-height:1.8;margin-left:1.5rem}
+    .info-section li{margin-bottom:0.5rem}
+    
+    .tag{display:inline-flex;align-items:center;gap:6px;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:2px;padding:4px 8px;margin:2px 6px 0 0;font-size:12px;color:#cfe1ff}
+    .legend{display:flex;gap:8px;flex-wrap:wrap}
+    .muted{color:var(--muted);font-size:12px}
+    .notice{font-size:12px;color:#b3c6ff;margin-top:8px}
+    .table{width:100%;border-collapse:collapse;font-size:13px}
+    .table th,.table td{border-bottom:1px dashed #2a2a2a;padding:6px 8px;text-align:right}
+    .table th:first-child,.table td:first-child{text-align:left}
+    
+    @media (max-width:1080px){
+      main{grid-template-columns:1fr}
+      .right{grid-template-rows:auto}
+      .cards{grid-template-columns:1fr}
+      .comparison-grid{grid-template-columns:1fr}
+      .preset-buttons{flex-direction:column}
+    }
+    
+    .focus-chart main{grid-template-columns:1fr}
+    .focus-chart .left{display:none}
+    .focus-chart .cards{grid-template-columns:repeat(2,1fr)}
+    .help{font-size:12px;color:var(--muted);margin:4px 0 0}
+    details.helpbox{border:1px dashed #2a2a2a;padding:8px 10px;border-radius:2px;background:#0a0a0a}
+    details.helpbox summary{cursor:pointer;color:#cfe1ff}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="home-link">← Home</a>
+      <div>
+        <h1>LEO Re-entry & Environmental Impact Model</h1>
+        <div class="sub">Numerical 1-DOF ballistic re-entry with environmental impact analysis</div>
+      </div>
+      <div style="width:100px"></div>
+    </div>
+  </header>
+
+  <div class="mode-toggle-container">
+    <div class="mode-toggle">
+      <button class="mode-btn-toggle active" onclick="setMode('simple')">Simple Mode</button>
+      <button class="mode-btn-toggle" onclick="setMode('advanced')">Advanced Mode</button>
+    </div>
+  </div>
+
+  <div class="presets-section">
+    <div class="presets-container">
+      <div class="presets-title">Quick Preset Scenarios</div>
+      <div class="preset-buttons">
+        <button class="preset-btn" onclick="loadPreset('starlink')">📡 Starlink Satellite (260 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('iss')">🛰️ ISS Module (15,000 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('gps')">🌐 GPS Satellite (2,000 kg)</button>
+        <button class="preset-btn" onclick="loadPreset('cubesat')">📦 CubeSat (5 kg)</button>
+      </div>
+    </div>
+  </div>
+
+  <main id="mainGrid">
+    <div class="simple-controls">
+      <div class="simple-group">
+        <h3>Satellite Mass</h3>
+        <div class="simple-slider">
+          <label>How heavy is the satellite?</label>
+          <input type="range" id="simple_mass" min="5" max="15000" value="220" step="10">
+          <div class="simple-value"><span id="simple_mass_val">220</span> kg</div>
+        </div>
+      </div>
+
+      <div class="simple-group">
+        <h3>Entry Speed</h3>
+        <div class="simple-slider">
+          <label>How fast is it falling?</label>
+          <input type="range" id="simple_speed" min="7000" max="8000" value="7800" step="10">
+          <div class="simple-value"><span id="simple_speed_val">7800</span> m/s</div>
+        </div>
+      </div>
+
+      <div class="simple-group">
+        <h3>Material Composition</h3>
+        <select id="simple_material" style="width:100%;padding:0.8rem;font-size:1rem;background:#0a0a0a;border:1px solid #2a2a2a;color:#fff">
+          <option value="aluminum">Mostly Aluminum (typical satellite)</option>
+          <option value="mixed">Mixed Materials (space station module)</option>
+          <option value="dense">Dense Metals (GPS satellite)</option>
+        </select>
+      </div>
+
+      <button class="btn" style="width:100%;padding:1.2rem;font-size:1rem;margin-top:1rem" onclick="runFromSimple()">▶ Run Simulation</button>
+    </div>
+
+    <section class="left panel" aria-label="Inputs">
+      <div class="group">
+        <h3>Vehicle & Trajectory</h3>
+        <label><span>Initial mass m<sub>0</sub> (kg)</span><input id="m0" type="number" step="1" value="220"/></label>
+        <label><span>Reference area A (m²)</span><input id="area" type="number" step="0.01" value="0.6"/></label>
+        <label><span>Drag coefficient C<sub>D</sub></span><input id="cd" type="number" step="0.01" value="2.1"/></label>
+        <label><span>Nose radius R<sub>n</sub> (m)</span><input id="rn" type="number" step="0.01" value="0.20"/></label>
+        <label><span>Initial speed v<sub>0</sub> (m/s)</span><input id="v0" type="number" step="1" value="7800"/></label>
+        <label><span>Entry altitude h<sub>0</sub> (km)</span><input id="h0" type="number" step="1" value="120"/></label>
+        <label><span>Flight-path angle γ (deg)</span><input id="gamma" type="number" step="0.1" value="1.2"/></label>
+        <label><span>Time step Δt (s)</span><input id="dt" type="number" step="0.1" value="0.2"/></label>
+        <label><span>Max sim time (s)</span><input id="tmax" type="number" step="1" value="8000"/></label>
+        <label><span>Breakup pressure q* (Pa)</span><input id="qcrit" type="number" step="1" value="1500"/></label>
+        <label><span>Lift (L/D)</span><input id="ld" type="number" step="0.01" value="0.00"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Materials & Mass Fractions</h3>
+        <label><span>Aluminum</span><input id="f_al" type="number" step="0.01" value="0.55"/></label>
+        <label><span>Titanium</span><input id="f_ti" type="number" step="0.01" value="0.10"/></label>
+        <label><span>Stainless steel</span><input id="f_ss" type="number" step="0.01" value="0.05"/></label>
+        <label><span>Electronics+Cu</span><input id="f_cu" type="number" step="0.01" value="0.08"/></label>
+        <label><span>CFRP/epoxy</span><input id="f_cfrp" type="number" step="0.01" value="0.17"/></label>
+        <label><span>Other/inert</span><input id="f_other" type="number" step="0.01" value="0.05"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Thermochemistry</h3>
+        <label><span>H<sub>abl</sub>(Al) MJ/kg</span><input id="H_al" type="number" step="0.1" value="13.0"/></label>
+        <label><span>H<sub>abl</sub>(Ti) MJ/kg</span><input id="H_ti" type="number" step="0.1" value="14.0"/></label>
+        <label><span>H<sub>abl</sub>(SS) MJ/kg</span><input id="H_ss" type="number" step="0.1" value="16.0"/></label>
+        <label><span>H<sub>abl</sub>(Cu) MJ/kg</span><input id="H_cu" type="number" step="0.1" value="12.0"/></label>
+        <label><span>H<sub>abl</sub>(CFRP) MJ/kg</span><input id="H_cfrp" type="number" step="0.1" value="25.0"/></label>
+        <label><span>Heat efficiency</span><input id="eta_abl" type="number" step="0.01" value="0.35"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Stochastic Breakup</h3>
+        <label><span>Enable breakup</span><input id="stoch_on" type="checkbox" checked></label>
+        <label><span>Mean fragments</span><input id="N_frag" type="number" step="1" value="25"/></label>
+        <label><span>Mass spread σ</span><input id="sigma_ln" type="number" step="0.1" value="1.0"/></label>
+        <label><span>Area factor k<sub>A</sub></span><input id="kA" type="number" step="0.01" value="0.025"/></label>
+        <label><span>Casualty area (m²)</span><input id="A_cas" type="number" step="0.01" value="0.35"/></label>
+        <label><span>Land fraction</span><input id="f_land" type="number" step="0.01" value="0.29"/></label>
+      </div>
+
+      <div class="group">
+        <h3>Environmental Yields</h3>
+        <label><span>Al → Al₂O₃</span><input id="y_al2o3" type="number" step="0.01" value="0.70"/></label>
+        <label><span>Ti → TiO₂</span><input id="y_tio2" type="number" step="0.01" value="0.60"/></label>
+        <label><span>SS → oxides</span><input id="y_ssox" type="number" step="0.01" value="0.40"/></label>
+        <label><span>Cu → CuO</span><input id="y_cuox" type="number" step="0.01" value="0.50"/></label>
+        <label><span>CFRP → BC</span><input id="y_bc" type="number" step="0.01" value="0.15"/></label>
+        <label><span>SSA Al₂O₃ m²/g</span><input id="ssa_al2o3" type="number" step="0.1" value="5.0"/></label>
+        <label><span>SSA TiO₂ m²/g</span><input id="ssa_tio2" type="number" step="0.1" value="8.0"/></label>
+        <label><span>NOₓ yield kg/MJ</span><input id="kNOx" type="number" step="0.00001" value="0.00003"/></label>
+        <label><span>NOₓ peak alt km</span><input id="hNOx" type="number" step="1" value="35"/></label>
+        <label><span>O₃ loss κ</span><input id="kO3" type="number" step="1e10" value="2e12"/></label>
+        <label><span>Window days</span><input id="tO3days" type="number" step="1" value="30"/></label>
+      </div>
+
+      <div class="group row">
+        <button id="run" class="btn">▶ Run</button>
+        <button id="export" class="btn secondary">⇩ Export</button>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="card" id="chartCard">
+        <div class="toolbar" style="display:flex;gap:8px;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap">
+          <div class="legend">
+            <label class="tag"><input id="show_alt" type="checkbox" checked> Altitude</label>
+            <label class="tag"><input id="show_spd" type="checkbox" checked> Speed</label>
+            <label class="tag"><input id="show_q" type="checkbox" checked> Pressure</label>
+            <label class="tag"><input id="show_heat" type="checkbox" checked> Heating</label>
+          </div>
+          <button id="focus" class="btn">📈 Focus</button>
+        </div>
+        <canvas id="plot" height="460"></canvas>
+      </div>
+      
+      <div class="comparison-section">
+        <div class="comparison-title">Environmental Impact Comparison</div>
+        <div class="comparison-grid">
+          <div class="comparison-item">
+            <div class="comparison-label">This Satellite Reentry</div>
+            <div class="comparison-value" id="sat_al2o3">~24 kg</div>
+            <div class="comparison-label">Aluminum Oxide (Al₂O₃)</div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">Equivalent To</div>
+            <div class="comparison-value" id="car_equiv">~5 cars</div>
+            <div class="comparison-label">Driving for one year</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h4>Key Events</h4>
+          <div id="events"></div>
+        </div>
+        <div class="card">
+          <h4>Totals</h4>
+          <div id="totals"></div>
+        </div>
+        <div class="card">
+          <h4>Layer Depositions</h4>
+          <table class="table" id="layers">
+            <thead><tr><th>Layer</th><th>Al₂O₃</th><th>TiO₂</th><th>NOₓ</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>🛡️ Mitigation Strategies</h3>
+        <p>Technologies and approaches to reduce reentry pollution:</p>
+        <ul>
+          <li><strong>Controlled Deorbiting:</strong> Guiding satellites to burn up over oceans minimizes land impact risks.</li>
+          <li><strong>Alternative Materials:</strong> Using materials that produce less harmful emissions during burnup.</li>
+          <li><strong>Extended Orbital Life:</strong> Longer operational periods reduce reentry frequency.</li>
+          <li><strong>Active Debris Removal:</strong> Capturing and safely deorbiting defunct satellites.</li>
+          <li><strong>Complete Burnup Design:</strong> Engineering satellites to fully disintegrate in atmosphere.</li>
+        </ul>
+      </div>
+
+      <div class="info-section">
+        <h3>📜 Policy & Regulation</h3>
+        <p>Current and proposed regulations addressing space debris:</p>
+        <ul>
+          <li><strong>25-Year Rule:</strong> Satellites must deorbit within 25 years of mission end.</li>
+          <li><strong>ESA Zero Debris Charter:</strong> Commitment to eliminate debris creation by 2030.</li>
+          <li><strong>UN Space Debris Guidelines:</strong> Voluntary guidelines for sustainable operations.</li>
+          <li><strong>Proposed Regulations:</strong> Environmental impact assessments for mega-constellations.</li>
+          <li><strong>International Cooperation:</strong> Need for global standards on design and disposal.</li>
+        </ul>
+      </div>
+
+      <div class="card" style="grid-column:1/-1">
+        <h4>Risk Proxies</h4>
+        <div id="risk"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  const μ = 3.986004418e14, Re = 6371e3, kSG = 1.74153e-4, POP = 8.0e9, LAND = 1.49e14, PPERM2 = POP/LAND;
+  const toFixed = (x,n=2)=>Number.isFinite(x)?x.toFixed(n):"-";
+
+  let currentMode = 'simple';
+
+  function setMode(mode) {
+    currentMode = mode;
+    const mainGrid = document.getElementById('mainGrid');
+    const btns = document.querySelectorAll('.mode-btn-toggle');
+    const leftPanel = document.querySelector('.left');
+    
+    btns.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.mode-btn-toggle').forEach((b,i) => {
+      if((mode==='simple' && i===0) || (mode==='advanced' && i===1)) b.classList.add('active');
+    });
+    
+    if (mode === 'simple') {
+      mainGrid.classList.add('simple-mode');
+      leftPanel.classList.add('hidden');
+    } else {
+      mainGrid.classList.remove('simple-mode');
+      leftPanel.classList.remove('hidden');
+    }
+  }
+
+  const presets = {
+    starlink: {m0:260, area:2.8, cd:2.2, rn:0.15, v0:7750, gamma:0.8, f_al:0.60, f_ti:0.08, f_ss:0.05, f_cu:0.12, f_cfrp:0.12, f_other:0.03},
+    iss: {m0:15000, area:15, cd:2.0, rn:2.0, v0:7660, gamma:1.5, f_al:0.45, f_ti:0.15, f_ss:0.15, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
+    gps: {m0:2000, area:8, cd:2.1, rn:0.8, v0:3900, gamma:2.0, f_al:0.40, f_ti:0.20, f_ss:0.10, f_cu:0.15, f_cfrp:0.10, f_other:0.05},
+    cubesat: {m0:5, area:0.1, cd:2.2, rn:0.05, v0:7800, gamma:0.5, f_al:0.70, f_ti:0.05, f_ss:0.02, f_cu:0.15, f_cfrp:0.05, f_other:0.03}
+  };
+
+  function loadPreset(type) {
+    const p = presets[type];
+    Object.keys(p).forEach(k => {
+      const el = document.getElementById(k);
+      if (el) el.value = p[k];
+    });
+    run();
+  }
+
+  document.getElementById('simple_mass')?.addEventListener('input', e => {
+    document.getElementById('simple_mass_val').textContent = e.target.value;
+    document.getElementById('m0').value = e.target.value;
+  });
+  document.getElementById('simple_speed')?.addEventListener('input', e => {
+    document.getElementById('simple_speed_val').textContent = e.target.value;
+    document.getElementById('v0').value = e.target.value;
+  });
+  document.getElementById('simple_material')?.addEventListener('change', e => {
+    const matProfiles = {
+      aluminum: {f_al:0.70, f_ti:0.05, f_ss:0.05, f_cu:0.10, f_cfrp:0.08, f_other:0.02},
+      mixed: {f_al:0.50, f_ti:0.15, f_ss:0.10, f_cu:0.10, f_cfrp:0.10, f_other:0.05},
+      dense: {f_al:0.35, f_ti:0.20, f_ss:0.15, f_cu:0.15, f_cfrp:0.10, f_other:0.05}
+    };
+    const prof = matProfiles[e.target.value];
+    Object.keys(prof).forEach(k => {
+      const el = document.getElementById(k);
+      if(el) el.value = prof[k];
+    });
+  });
+
+  function runFromSimple() {
+    run();
+  }
+
+  function stdAtmDensity(h){
+    const layers=[
+      {h:0,rho0:1.225,H:7400},{h:11000,rho0:0.3639,H:6000},{h:20000,rho0:0.0880,H:6400},
+      {h:32000,rho0:0.01322,H:7000},{h:47000,rho0:0.00143,H:7200},{h:51000,r
